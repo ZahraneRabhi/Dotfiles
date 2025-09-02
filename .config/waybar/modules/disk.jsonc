@@ -1,0 +1,7 @@
+{
+    "disk": {
+        "interval": 60,
+        "path": "/",
+        "format": " {free}"
+    }
+}

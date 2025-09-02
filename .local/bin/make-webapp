@@ -1,0 +1,28 @@
+#!/bin/bash
+# make-webapp - quick helper to create Chromium web apps
+
+read -p "App Name: " NAME
+read -p "App URL: " URL
+read -p "Icon (path or system icon name, leave blank for web-browser): " ICON
+
+# fallback if no icon entered
+[ -z "$ICON" ] && ICON="web-browser"
+
+FILE=~/.local/share/applications/$(echo "$NAME" | tr ' ' '-' | tr '[:upper:]' '[:lower:]').desktop
+
+mkdir -p ~/.local/share/applications
+
+cat > "$FILE" <<EOF
+[Desktop Entry]
+Name=$NAME
+Exec=chromium --app=$URL
+Icon=$ICON
+Terminal=false
+Type=Application
+Categories=Web;Internet;
+EOF
+
+chmod +x "$FILE"
+
+echo "✅ Created $FILE"
+echo "   You can now find '$NAME' in Wofi!"

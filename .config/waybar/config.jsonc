@@ -1,0 +1,58 @@
+// Zahry Waybar Modular Config
+{
+    "include": [
+        // Hyprland shit
+        "modules/hyprland/workspaces.jsonc",
+        "modules/hyprland/window.jsonc",
+
+        // Native waybar shit
+        "modules/backlight.jsonc",
+        "modules/battery.jsonc",
+        "modules/clock.jsonc",
+        "modules/cpu.jsonc",
+        "modules/disk.jsonc",
+        "modules/memory.jsonc",
+        "modules/network.jsonc",
+        "modules/cpu.jsonc",
+        "modules/power.jsonc",
+        "modules/audio_manager.jsonc",
+        "modules/media_player.jsonc",
+
+        // Custom shit
+        "modules/custom/*.jsonc"
+    ],
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 3 ,
+
+    "modules-left": [
+        "custom/sep",
+        "custom/logo",
+        "custom/sep",
+        "hyprland/workspaces",
+        "hyprland/window"
+
+    ],
+    "modules-center": [        
+        "mpris",
+        "custom/sep"],
+        
+    "modules-right": [
+        "pulseaudio",
+        "custom/sep",
+        "network",
+        "custom/sep",
+        "cpu",
+        "custom/sep",
+        "disk",
+        "custom/sep",
+        "memory",
+        "custom/sep",
+        "backlight",
+        "custom/sep",
+        "battery",
+        "custom/sep",
+        "clock"
+    ]
+}

@@ -1,0 +1,6 @@
+{
+    "hyprland/window": {
+        "max-length": 20,
+        "seperate-outputs": false
+    }
+}

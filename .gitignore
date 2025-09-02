@@ -1,0 +1,51 @@
+# --------------------------------------------------
+# General cache & temp files
+# --------------------------------------------------
+.cache/
+*.log
+*.lock
+*.pid
+*.sock
+*.swp
+*~
+
+# --------------------------------------------------
+# System / desktop environment junk
+# --------------------------------------------------
+.DS_Store
+Thumbs.db
+
+# --------------------------------------------------
+# Local/share: ignore all, but allow icons + applications
+# --------------------------------------------------
+.local/share/*
+!.local/share/icons/
+!.local/share/applications/
+
+# Trash & recent files (still ignore)
+.local/share/Trash/
+.local/share/recently-used.xbel
+.local/share/recently-used.xbel-journal
+
+# --------------------------------------------------
+# App-specific caches (safe to ignore)
+# --------------------------------------------------
+.config/pulse/             # PulseAudio
+.config/pipewire/          # PipeWire
+.config/Code/Cache/        # VS Code cache
+.config/Code/CachedData/
+.config/Code/Service Worker/
+.config/chromium/          # Chromium cache
+.config/google-chrome/     # Chrome cache
+.config/BraveSoftware/     # Brave cache
+.config/discord/           # Discord cache
+.config/spotify/           # Spotify cache
+.config/Slack/             # Slack cache
+
+# --------------------------------------------------
+# Programming junk
+# --------------------------------------------------
+node_modules/
+__pycache__/
+target/
+npm-debug.log*
