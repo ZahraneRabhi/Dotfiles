@@ -1,0 +1,18 @@
+#!/bin/bash
+
+WAYBAR_DIR="$HOME/.config/waybar"
+THEMES_DIR="$WAYBAR_DIR/themes"
+TRANSPARENT="$THEMES_DIR/transparent.css"
+COLORED="$THEMES_DIR/colored.css"
+CURRENT="$(readlink -f "$WAYBAR_DIR/style.css")"
+
+if [ "$CURRENT" = "$TRANSPARENT" ]; then
+    ln -sf "$COLORED" "$WAYBAR_DIR/style.css"
+else
+    ln -sf "$TRANSPARENT" "$WAYBAR_DIR/style.css"
+fi
+
+# Kill and restart Waybar
+pkill -x waybar 2>/dev/null
+while pgrep -x waybar >/dev/null; do sleep 0.1; done
+nohup waybar >/dev/null 2>&1 &

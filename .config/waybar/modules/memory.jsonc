@@ -1,6 +1,5 @@
 {
-"memory": {
-  "format": "MEM: {used}GiB"
-}
-
+  "memory": {
+    "format": "MEM: {used}GiB"
+  }
 }

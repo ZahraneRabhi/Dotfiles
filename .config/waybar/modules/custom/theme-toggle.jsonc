@@ -1,0 +1,8 @@
+{
+    "custom/theme-toggle": {
+        "format": "Theme: {} ",
+        "exec": "~/.local/bin/theme-icon",
+        "interval": 0,
+        "on-click": "~/.local/bin/toggle-waybar-theme"
+    }
+}

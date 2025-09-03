@@ -1,0 +1,13 @@
+#!/bin/bash
+
+WAYBAR_DIR="$HOME/.config/waybar"
+CLEAN="$WAYBAR_DIR/themes/transparent.css"
+CURRENT="$(readlink -f "$WAYBAR_DIR/style.css")"
+
+if [ "$CURRENT" = "$CLEAN" ]; then
+    # Transparent theme active → show moon
+    echo ""
+else
+    # Colored theme active → show paintbrush
+    echo ""
+fi

@@ -15,6 +15,7 @@ Don't roll without these tho:
 - playerctl, brightnessctl
 - hyprsunset
 - neofetch
+
 I aint writing allat ngl just go check ```pkglist.txt``` and  execute the command below
 ```bash
 sudo pacman -S --needed - < pkglist.txt

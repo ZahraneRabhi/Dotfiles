@@ -1,6 +1,6 @@
 {
     "custom/logo": {
-        "format": " ", // so you're telling me I can use any icon????? so dope ngl
+        "format": " ",
         "tooltip": "Launch Apps",
         "on-click": "~/.local/bin/wofi-toggle",
         "class": "arch-logo"
