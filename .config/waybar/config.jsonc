@@ -19,8 +19,8 @@
         "modules/custom/seperator.jsonc",
         "modules/custom/logo.jsonc",
         "modules/custom/nightlight.jsonc",
-        "modules/custom/theme-toggle.jsonc"
-
+        "modules/custom/theme-toggle.jsonc",
+        "modules/custom/notifications.jsonc"
     ],
     "layer": "top",
     "position": "top",
@@ -38,7 +38,8 @@
     ],
     "modules-center": [        
         "mpris",
-        "custom/sep"],
+        "custom/sep"
+    ],
     "modules-right": [
         "custom/theme-toggle",
         "custom/sep",
@@ -46,7 +47,7 @@
         "custom/sep",
         "network",
         "custom/sep",
-        "cpu",
+        "custom/nightlight",
         "custom/sep",
         "disk",
         "custom/sep",
@@ -56,6 +57,9 @@
         "custom/sep",
         "battery",
         "custom/sep",
-        "clock"
+        "clock",
+        "custom/sep",
+        "custom/notification",
+        "custom/sep"
     ]
 }

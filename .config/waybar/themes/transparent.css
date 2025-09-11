@@ -54,9 +54,12 @@ window#waybar {
 #custom-power,
 #custom-logo,
 #custom-nightlight,
+#custom-notification,
 #custom-sep {
     padding: 0 8px;
     color: @fg;
     background: @none;
     border: none;
 }
+
+

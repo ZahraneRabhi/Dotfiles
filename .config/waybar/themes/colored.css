@@ -59,6 +59,7 @@ button:hover {
 #disk,
 #network,
 #backlight,
+#custom-notification,
 #tray {
     padding: 0 8px;
     color: @white;
@@ -178,4 +179,10 @@ button:hover {
 #custom-theme-toggle:hover {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 6px;
+}
+
+#custom-notification{
+    color: @ylw;
+    border-bottom: 4px solid @ylw;
+    padding: 0 8px;
 }

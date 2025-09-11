@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+STATE="${XDG_RUNTIME_DIR:-/tmp}/toggle-nightlight.state"
+TEMP=4000   # Change to the color temperature you prefer (lower = warmer)
+
+# Start hyprsunset if not running
+if ! pgrep -x hyprsunset >/dev/null 2>&1; then
+    hyprsunset &>/dev/null &
+    sleep 0.2  # give it a moment to create its IPC socket
+fi
+
+# Initialize state file if missing
+[ ! -f "$STATE" ] && echo "off" > "$STATE"
+
+CURRENT_STATE=$(cat "$STATE")
+
+if [ "$CURRENT_STATE" = "on" ]; then
+    # Disable nightlight (reset to identity)
+    if hyprctl hyprsunset identity >/dev/null 2>&1; then
+        echo "off" > "$STATE"
+        notify-send "Nightlight" "Disabled"
+    else
+        notify-send "Nightlight" "Failed to disable (hyprctl error)"
+        exit 1
+    fi
+else
+    # Enable nightlight
+    if hyprctl hyprsunset temperature "$TEMP" >/dev/null 2>&1; then
+        echo "on" > "$STATE"
+        notify-send "Nightlight" "Enabled ($TEMP K)"
+    else
+        notify-send "Nightlight" "Failed to enable (hyprctl error)"
+        exit 1
+    fi
+fi

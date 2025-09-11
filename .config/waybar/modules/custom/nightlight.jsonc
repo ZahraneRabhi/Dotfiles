@@ -1,10 +1,8 @@
 {
     "custom/nightlight": {
         "format": "{}",
-        "exec": "echo '{\"text\":\"󰖔\",\"tooltip\":\"Night Light toggle\"}'",
-        "interval": 0,
-        "return-type": "json",
-        "on-click": "hyprctl hyprsunset temperature 7000",
-        "on-click-right": "hyprctl hyprsunset identity"
+        "exec": "~/.local/bin/nightlight-status",
+        "interval": 1,
+        "on-click": "~/.local/bin/toggle-nightlight"
     }
 }

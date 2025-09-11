@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+STATE="${XDG_RUNTIME_DIR:-/tmp}/toggle-nightlight.state"
+
+# Initialize if missing
+[ ! -f "$STATE" ] && echo "off" > "$STATE"
+
+if [ "$(cat "$STATE")" = "on" ]; then
+    echo "Exposed 󰖨"  # sun icon
+else
+    echo "Stealth "  # moon icon (Papirus/Nerd Font)
+
+fi

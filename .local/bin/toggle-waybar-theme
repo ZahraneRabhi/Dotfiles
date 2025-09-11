@@ -1,18 +1,82 @@
 #!/bin/bash
 
+# Directories
 WAYBAR_DIR="$HOME/.config/waybar"
-THEMES_DIR="$WAYBAR_DIR/themes"
-TRANSPARENT="$THEMES_DIR/transparent.css"
-COLORED="$THEMES_DIR/colored.css"
-CURRENT="$(readlink -f "$WAYBAR_DIR/style.css")"
+HYPR_THEMES_DIR="$HOME/.config/hypr/hyprland-modules"
+WALLPAPER_DIR="$HOME/Wallpapers"
+FOOT_DIR="$HOME/.config/foot"  
 
-if [ "$CURRENT" = "$TRANSPARENT" ]; then
-    ln -sf "$COLORED" "$WAYBAR_DIR/style.css"
-else
-    ln -sf "$TRANSPARENT" "$WAYBAR_DIR/style.css"
+# Arrays (index = 0..N-1)
+WALLPAPERS=(
+    "$WALLPAPER_DIR/skeleton.jpg"
+    "$WALLPAPER_DIR/wallhaven-3qkzqv.jpg"
+    "$WALLPAPER_DIR/wallhaven-rr8wzj.jpg"
+    "$WALLPAPER_DIR/wallhaven-d61yjo.jpg"
+    "$WALLPAPER_DIR/wallhaven-x6m913.jpg"
+)
+
+WAYBAR_THEMES=(
+    "$WAYBAR_DIR/themes/colored.css"
+    "$WAYBAR_DIR/themes/transparent.css"
+    "$WAYBAR_DIR/themes/transparent.css"
+    "$WAYBAR_DIR/themes/transparent.css"
+    "$WAYBAR_DIR/themes/transparent.css"
+)
+
+HYPR_THEMES=(
+    "$HYPR_THEMES_DIR/looks/look-colored.conf"
+    "$HYPR_THEMES_DIR/looks/look-sky.conf"
+    "$HYPR_THEMES_DIR/looks/look-mountain.conf"
+    "$HYPR_THEMES_DIR/looks/look-sunset.conf"
+    "$HYPR_THEMES_DIR/looks/look-cobalts.conf"
+)
+
+FOOT_THEMES=(
+    "$FOOT_DIR/skeleton.ini"
+    "$FOOT_DIR/sky.ini"
+    "$FOOT_DIR/mountain.ini"
+    "$FOOT_DIR/sunset.ini"
+    "$FOOT_DIR/cobalts.ini"
+)
+
+ACTIVE_HYPR="$HYPR_THEMES_DIR/look.conf"
+ACTIVE_FOOT="$FOOT_DIR/foot.ini"  # The file foot actually uses
+
+# Index state file
+INDEX_FILE="$WALLPAPER_DIR/.wallpaper_index"
+if [ ! -f "$INDEX_FILE" ]; then
+    echo 0 > "$INDEX_FILE"
 fi
+INDEX=$(cat "$INDEX_FILE")
 
-# Kill and restart Waybar
+# Next index (cycle)
+NEXT_INDEX=$(( (INDEX + 1) % ${#WALLPAPERS[@]} ))
+echo $NEXT_INDEX > "$INDEX_FILE"
+
+# Select corresponding theme + wallpaper + foot config
+WALLPAPER="${WALLPAPERS[$NEXT_INDEX]}"
+WAYBAR_THEME="${WAYBAR_THEMES[$NEXT_INDEX]}"
+HYPR_THEME="${HYPR_THEMES[$NEXT_INDEX]}"
+FOOT_THEME="${FOOT_THEMES[$NEXT_INDEX]}"
+
+# Apply Waybar theme
+ln -sf "$WAYBAR_THEME" "$WAYBAR_DIR/style.css"
+
+# Apply Hyprland theme
+ln -sf "$HYPR_THEME" "$ACTIVE_HYPR"
+
+# Apply Foot theme (just symlink, no auto-open)
+ln -sf "$FOOT_THEME" "$ACTIVE_FOOT"
+pkill -x foot 2>/dev/null
+
+# Set wallpaper
+hyprctl hyprpaper preload "$WALLPAPER"
+hyprctl hyprpaper wallpaper "eDP-1,$WALLPAPER"
+
+# Restart Waybar
 pkill -x waybar 2>/dev/null
 while pgrep -x waybar >/dev/null; do sleep 0.1; done
 nohup waybar >/dev/null 2>&1 &
+
+# Reload Hyprland config
+hyprctl reload
