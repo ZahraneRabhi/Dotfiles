@@ -22,14 +22,26 @@ sudo pacman -S --needed - < pkglist.txt
 ```
 
 ## The FLex Zone
-#### Full Desktop
+You can just toggle between these using the custom waybar Theme toggle
+#### Main Theme
 <img src="./assets/desktop.png" alt="Full Desktop" width="800"/>
+
+#### Mountain Theme
+<img src="./assets/mountain-theme.png" alt="Full Desktop" width="800"/>
+
+#### Sunset Theme
+<img src="./assets/sunset-theme.png" alt="Full Desktop" width="800"/>
+
+#### Morning Theme
+<img src="./assets/morning-theme.png" alt="Full Desktop" width="800"/>
 
 #### Foot Terminal 
 <img src="./assets/terminal.png" alt="Terminal" width="800"/>
 
 #### Waybar  
 <img src="./assets/waybar.png" alt="Waybar" width="800"/>
+<img src="./assets/waybar2.png" alt="Waybar" width="800"/>
+<img src="./assets/waybar3.png" alt="Waybar" width="800"/>
 
 #### Wofi Launcher 
 <img src="./assets/wofi-launcher.png" alt="WofiLauncer" width="800"/>
