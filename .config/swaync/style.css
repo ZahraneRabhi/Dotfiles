@@ -1,0 +1,95 @@
+/* Base colors matching the wallpaper */
+@define-color fg       #fef6f5;          /* soft off-white for text */
+@define-color accent   #ff91a4;          /* pink accent from sky highlights */
+@define-color bg       rgba(25, 20, 45, 0.85); /* dark twilight purple */
+@define-color bg-alt   rgba(40, 30, 60, 0.9);  /* slightly lighter for panels */
+@define-color border   rgba(255, 255, 255, 0.12);
+@define-color urgent   #ff5f6d;          /* strong pink/red for alerts */
+@define-color low      #d0c0e0;          /* muted purple for subtle notifications */
+
+/* Window styling */
+window {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 14px;
+    border: 1px solid @border;
+    padding: 12px;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+}
+
+/* Buttons */
+button {
+    background-color: @accent;
+    color: #fff;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+
+button:hover {
+    background-color: #ffadc0; /* lighter pink on hover */
+}
+
+/* Headers */
+header {
+    font-size: 16px;
+    font-weight: bold;
+    color: @fg;
+    border-bottom: 1px solid @border;
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+}
+
+/* Notifications */
+.notification {
+    background-color: rgba(50, 35, 70, 0.7); 
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    border-left: 4px solid @accent;
+    transition: background 0.2s ease;
+}
+
+.notification:hover {
+    background-color: rgba(60, 45, 90, 0.85);
+}
+
+.notification.critical {
+    border-left-color: @urgent;
+    color: @urgent;
+    font-weight: bold;
+}
+
+.notification.low {
+    border-left-color: @low;
+    font-style: italic;
+}
+
+/* Text inside notifications */
+.notification .title {
+    font-weight: bold;
+    color: @fg;
+}
+
+.notification .body {
+    font-size: 14px;
+    color: rgba(254, 246, 245, 0.85);
+}
+
+/* Optional images in notifications */
+.notification img {
+    border-radius: 10px;
+    margin-left: 8px;
+}
+
+/* Scrollbars for GTK apps */
+scrollbar {
+    background-color: rgba(60, 45, 90, 0.5);
+    border-radius: 6px;
+}
+
+scrollbar slider {
+    background-color: @accent;
+    border-radius: 6px;
+}
