@@ -3,44 +3,20 @@
 # Directories
 WAYBAR_DIR="$HOME/.config/waybar"
 HYPR_THEMES_DIR="$HOME/.config/hypr/hyprland-modules"
-WALLPAPER_DIR="$HOME/Wallpapers"
-FOOT_DIR="$HOME/.config/foot"  
-
-# Arrays (index = 0..N-1)
-WALLPAPERS=(
-    "$WALLPAPER_DIR/skeleton.jpg"
-    "$WALLPAPER_DIR/wallhaven-3qkzqv.jpg"
-    "$WALLPAPER_DIR/wallhaven-rr8wzj.jpg"
-    "$WALLPAPER_DIR/wallhaven-d61yjo.jpg"
-    "$WALLPAPER_DIR/wallhaven-x6m913.jpg"
-)
-
-WAYBAR_THEMES=(
-    "$WAYBAR_DIR/themes/colored.css"
-    "$WAYBAR_DIR/themes/transparent.css"
-    "$WAYBAR_DIR/themes/transparent.css"
-    "$WAYBAR_DIR/themes/transparent.css"
-    "$WAYBAR_DIR/themes/transparent.css"
-)
-
-HYPR_THEMES=(
-    "$HYPR_THEMES_DIR/looks/look-colored.conf"
-    "$HYPR_THEMES_DIR/looks/look-sky.conf"
-    "$HYPR_THEMES_DIR/looks/look-mountain.conf"
-    "$HYPR_THEMES_DIR/looks/look-sunset.conf"
-    "$HYPR_THEMES_DIR/looks/look-cobalts.conf"
-)
-
-FOOT_THEMES=(
-    "$FOOT_DIR/skeleton.ini"
-    "$FOOT_DIR/sky.ini"
-    "$FOOT_DIR/mountain.ini"
-    "$FOOT_DIR/sunset.ini"
-    "$FOOT_DIR/cobalts.ini"
-)
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+FOOT_DIR="$HOME/.config/foot"
 
 ACTIVE_HYPR="$HYPR_THEMES_DIR/look.conf"
 ACTIVE_FOOT="$FOOT_DIR/foot.ini"  # The file foot actually uses
+
+# Theme bundles (name:wallpaper:waybar:hypr:foot)
+THEMES=(
+    "skeleton:$WALLPAPER_DIR/skeleton.jpg:$WAYBAR_DIR/themes/colored.css:$HYPR_THEMES_DIR/looks/look-colored.conf:$FOOT_DIR/skeleton.ini"
+    "sky:$WALLPAPER_DIR/blue_3.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-sky.conf:$FOOT_DIR/sky.ini"
+    "mountain:$WALLPAPER_DIR/wallhaven-rr8wzj.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-mountain.conf:$FOOT_DIR/mountain.ini"
+    "sunset:$WALLPAPER_DIR/wallhaven-d61yjo.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-sunset.conf:$FOOT_DIR/sunset.ini"
+    "cobalts:$WALLPAPER_DIR/silver.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-cobalts.conf:$FOOT_DIR/cobalts.ini"
+)
 
 # Index state file
 INDEX_FILE="$WALLPAPER_DIR/.wallpaper_index"
@@ -49,34 +25,48 @@ if [ ! -f "$INDEX_FILE" ]; then
 fi
 INDEX=$(cat "$INDEX_FILE")
 
-# Next index (cycle)
-NEXT_INDEX=$(( (INDEX + 1) % ${#WALLPAPERS[@]} ))
+# Decide next index
+DIRECTION=${1:-next} # default = next
+
+if [ "$DIRECTION" = "prev" ]; then
+    NEXT_INDEX=$(( (INDEX - 1 + ${#THEMES[@]}) % ${#THEMES[@]} ))
+elif [ "$DIRECTION" = "random" ]; then
+    NEXT_INDEX=$((RANDOM % ${#THEMES[@]}))
+else
+    NEXT_INDEX=$(( (INDEX + 1) % ${#THEMES[@]} ))
+fi
 echo $NEXT_INDEX > "$INDEX_FILE"
 
-# Select corresponding theme + wallpaper + foot config
-WALLPAPER="${WALLPAPERS[$NEXT_INDEX]}"
-WAYBAR_THEME="${WAYBAR_THEMES[$NEXT_INDEX]}"
-HYPR_THEME="${HYPR_THEMES[$NEXT_INDEX]}"
-FOOT_THEME="${FOOT_THEMES[$NEXT_INDEX]}"
+# Parse theme bundle
+IFS=":" read -r NAME WALLPAPER WAYBAR_THEME HYPR_THEME FOOT_THEME <<< "${THEMES[$NEXT_INDEX]}"
 
-# Apply Waybar theme
+# --- Apply theme ---
+
+# Waybar
 ln -sf "$WAYBAR_THEME" "$WAYBAR_DIR/style.css"
 
-# Apply Hyprland theme
+# Hyprland
 ln -sf "$HYPR_THEME" "$ACTIVE_HYPR"
 
-# Apply Foot theme (just symlink, no auto-open)
+# Foot
 ln -sf "$FOOT_THEME" "$ACTIVE_FOOT"
 pkill -x foot 2>/dev/null
 
-# Set wallpaper
-hyprctl hyprpaper preload "$WALLPAPER"
-hyprctl hyprpaper wallpaper "eDP-1,$WALLPAPER"
+# Wallpaper (apply to all monitors)
+for monitor in $(hyprctl monitors -j | jq -r '.[].name'); do
+    hyprctl hyprpaper preload "$WALLPAPER"
+    hyprctl hyprpaper wallpaper "$monitor,$WALLPAPER"
+done
 
 # Restart Waybar
-pkill -x waybar 2>/dev/null
-while pgrep -x waybar >/dev/null; do sleep 0.1; done
+if pgrep -x waybar >/dev/null; then
+    pkill -x waybar
+    while pgrep -x waybar >/dev/null; do sleep 0.1; done
+fi
 nohup waybar >/dev/null 2>&1 &
 
-# Reload Hyprland config
+# Reload Hyprland
 hyprctl reload
+
+# Notification
+notify-send "Theme switched" "Now using: $NAME"
