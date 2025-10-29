@@ -1,0 +1,70 @@
+@define-color fg #e8f4d4;
+/* soft cream from sunlit grass */
+@define-color teal #7db8c9;
+/* bright teal from sky */
+@define-color dark #0d2d38;
+/* deep teal background */
+@define-color none transparent;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 16px;
+}
+
+window#waybar {
+    background-color: @none;
+    color: @fg;
+}
+
+/* Workspaces */
+#workspaces button {
+    padding: 0 6px;
+    margin: 0 2px;
+    color: @fg;
+    background: @none;
+    border: 1px solid rgba(125, 184, 201, 0.4);
+    /* teal border */
+    border-radius: 6px;
+}
+
+#workspaces button.active {
+    color: @dark;
+    background: @teal;
+    border: 1px solid @teal;
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    color: #d4c984;
+    /* golden yellow warning */
+    border-color: #d4c984;
+}
+
+/* Active window title */
+#window {
+    padding: 0 10px;
+    color: @teal;
+    font-weight: bold;
+}
+
+/* Modules */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 8px;
+    color: @fg;
+    background: @none;
+    border: none;
+}

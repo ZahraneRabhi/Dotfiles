@@ -1,0 +1,98 @@
+@define-color fg #cad6f8;
+/* soft nebula-blue foreground */
+@define-color bg rgba(15, 10, 27, 0.45);
+/* dark glassy violet background */
+@define-color accent #7b97ff;
+/* cool radiant blue highlight */
+@define-color urgent #ff7ab8;
+/* nebula pink for urgent items */
+@define-color none transparent;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 16px;
+}
+
+/* === Waybar Core === */
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 12px;
+    border: 1px solid rgba(123, 151, 255, 0.2);
+    /* subtle glow border */
+    box-shadow: 0 0 10px rgba(123, 151, 255, 0.15);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* === Workspaces === */
+#workspaces button {
+    padding: 0 6px;
+    margin: 0 3px;
+    color: @fg;
+    background: rgba(30, 20, 45, 0.4);
+    border: 1px solid rgba(123, 151, 255, 0.15);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    background: rgba(123, 151, 255, 0.1);
+    border-color: rgba(123, 151, 255, 0.3);
+}
+
+#workspaces button.active {
+    color: #0f0a1b;
+    background: @accent;
+    border: 1px solid @accent;
+    font-weight: bold;
+    box-shadow: 0 0 6px rgba(123, 151, 255, 0.4);
+}
+
+#workspaces button.urgent {
+    color: @urgent;
+    border-color: @urgent;
+    box-shadow: 0 0 8px rgba(255, 122, 184, 0.3);
+}
+
+/* === Active Window Title === */
+#window {
+    padding: 0 10px;
+    color: @fg;
+    font-weight: bold;
+    text-shadow: 0 0 4px rgba(123, 151, 255, 0.3);
+}
+
+/* === Modules === */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 8px;
+    color: @fg;
+    background: transparent;
+    border: none;
+}
+
+/* === Hover & Glow Effects === */
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: @accent;
+    text-shadow: 0 0 6px rgba(123, 151, 255, 0.4);
+}

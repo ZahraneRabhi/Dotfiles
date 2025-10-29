@@ -26,8 +26,8 @@ You can just toggle between these using the custom waybar Theme toggle
 #### Main Theme
 <img src="./assets/desktop.png" alt="Full Desktop" width="800"/>
 
-#### Mountain Theme
-<img src="./assets/mountain-theme.png" alt="Full Desktop" width="800"/>
+#### Cyber Theme
+<img src="./assets/cyber-theme.png" alt="Full Desktop" width="800"/>
 
 #### Sunset Theme
 <img src="./assets/sunset-theme.png" alt="Full Desktop" width="800"/>
@@ -45,6 +45,12 @@ You can just toggle between these using the custom waybar Theme toggle
 
 #### Wofi Launcher 
 <img src="./assets/wofi-launcher.png" alt="WofiLauncer" width="800"/>
+
+#### Wofi based theme picker
+- toggle terminal, hypr, waybar all together 
+
+
+<img src="./assets/theme-picker.png" alt="WofiLauncer" width="800"/>
 
 #### Hyprland tiling windows 
 <img src="./assets/windows.png" alt="Windows" width="800"/>
