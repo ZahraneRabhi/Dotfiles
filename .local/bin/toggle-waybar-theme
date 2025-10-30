@@ -22,6 +22,8 @@ THEMES=(
     "Interstellar:$WALLPAPER_DIR/wallhaven-zp85do.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-cobalts.conf:$FOOT_DIR/cobalts.ini"
     "R3D:$WALLPAPER_DIR/wallhaven-yq8w5k.jpg:$WAYBAR_DIR/themes/cyber.css:$HYPR_THEMES_DIR/looks/look-cyber.conf:$FOOT_DIR/cyber.ini"
     "Litteral Vinland:$WALLPAPER_DIR/wallhaven-qzwxgq.jpg:$WAYBAR_DIR/themes/green-vinland.css:$HYPR_THEMES_DIR/looks/look-green-vinland.conf:$FOOT_DIR/green-vinland.ini"
+    "Renaissance:$WALLPAPER_DIR/wallhaven-x6vldd.jpg:$WAYBAR_DIR/themes/renaissance.css:$HYPR_THEMES_DIR/looks/look-renaissance.conf:$FOOT_DIR/renaissance.ini"
+    "The Anatomy :$WALLPAPER_DIR/wallhaven-8xxprk.jpg:$WAYBAR_DIR/themes/anatomy.css:$HYPR_THEMES_DIR/looks/look-anatomy.conf:$FOOT_DIR/anatomy.ini"
 )
 
 
@@ -33,7 +35,7 @@ for item in "${THEMES[@]}"; do
 done
 
 # Use Wofi to select theme
-SELECTED=$(printf "%s\n" "${THEME_NAMES[@]}" | wofi --dmenu --prompt "Select Theme" --width 400 --height 400)
+SELECTED=$(printf "%s\n" "${THEME_NAMES[@]}" | wofi --dmenu --prompt "Select Theme" --width 400 --height 600 --lines ${#THEME_NAMES[@]} --columns 1 --cache-file /dev/null)
 
 # If user cancelled, exit
 [ -z "$SELECTED" ] && exit 0

@@ -1,0 +1,75 @@
+@define-color fg #f5e6d3;
+/* warm cream from the marble and togas */
+@define-color accent #c4956f;
+/* terracotta/ochre from robes and architectural details */
+@define-color gold #d4a574;
+/* golden decorative frieze */
+@define-color sky #a8c4d4;
+/* soft blue from the sky visible through arches */
+@define-color dark #2d1f1a;
+/* deep brown from shadows and frame */
+@define-color burgundy #8b4a4a;
+/* wine red from robes */
+@define-color none transparent;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 16px;
+}
+
+window#waybar {
+    background-color: @none;
+    color: @fg;
+}
+
+/* Workspaces */
+#workspaces button {
+    padding: 0 6px;
+    margin: 0 2px;
+    color: @fg;
+    background: @none;
+    border: 1px solid rgba(196, 149, 111, 0.4);
+    /* terracotta border */
+    border-radius: 6px;
+}
+
+#workspaces button.active {
+    color: @dark;
+    background: @accent;
+    border: 1px solid @gold;
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    color: @gold;
+    border-color: @burgundy;
+}
+
+/* Active window title */
+#window {
+    padding: 0 10px;
+    color: @accent;
+    font-weight: bold;
+}
+
+/* Modules */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 8px;
+    color: @fg;
+    background: @none;
+    border: none;
+}

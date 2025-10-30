@@ -3,17 +3,19 @@
     font-family: "JetBrainsMono Nerd Font", monospace;
     font-size: 16px;
     font-weight: bold;
-    color: #c0caf5;
+    color: #e0e0e0;
+    /* neutral text */
 }
 
 /* Main window */
 window {
     margin: 10px;
     padding: 10px;
-    border: 2px solid rgba(65, 72, 104, 0.6);
+    border: 2px solid rgba(120, 120, 120, 0.35);
     border-radius: 12px;
-    background-color: rgba(36, 40, 59, 0.75); /* glassy transparent */
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4); /* subtle shadow */
+    background-color: rgba(20, 20, 25, 0.6);
+    /* semi-transparent glass */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Search input */
@@ -21,33 +23,24 @@ window {
     margin: 8px;
     padding: 6px 10px;
     border-radius: 8px;
-    border: 1px solid rgba(65, 72, 104, 0.8);
-    background-color: rgba(36, 40, 59, 0.7);
-    color: #c0caf5;
+    border: 1px solid rgba(120, 120, 120, 0.4);
+    background-color: rgba(30, 30, 35, 0.5);
+    color: #e0e0e0;
     transition: all 0.2s ease-in-out;
 }
 
 #input:focus {
-    border: 1px solid #7aa2f7;
-    background-color: rgba(65, 72, 104, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background-color: rgba(50, 50, 55, 0.5);
 }
 
 /* Boxes */
-#inner-box {
-    margin: 6px;
-    border: none;
-    background-color: transparent;
-}
-
-#outer-box {
-    margin: 6px;
-    border: none;
-    background-color: transparent;
-}
-
+#inner-box,
+#outer-box,
 #scroll {
-    margin: 0;
+    margin: 6px;
     border: none;
+    background-color: transparent;
 }
 
 /* Entries */
@@ -59,19 +52,20 @@ window {
     transition: background-color 0.2s ease-in-out;
     display: flex;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
 }
 
 /* Selected entry */
 #entry:selected {
-    background-color: rgba(122, 162, 247, 0.25); /* soft blue highlight */
-    border: 1px solid rgba(122, 162, 247, 0.6);
+    background-color: rgba(255, 255, 255, 0.15);
+    /* neutral light overlay */
+    border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 /* Text */
 #text {
     margin: 2px;
-    color: #c0caf5;
+    color: #e0e0e0;
 }
 
 #text:selected {

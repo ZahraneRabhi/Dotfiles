@@ -1,9 +1,9 @@
-## My Arch + Hyprland Dotfiles
+# My Arch + Hyprland Dotfiles
 
 This is my configs running straight on **Arch Linux** with **Hyprland**. No bloated setups, just the minimal stuff I need for productivity.
 
 
-## Requirements
+# Requirements
 Don't roll without these tho:
 - Hyprland 
 - Waybar
@@ -21,19 +21,21 @@ I aint writing allat ngl just go check ```pkglist.txt``` and  execute the comman
 sudo pacman -S --needed - < pkglist.txt
 ```
 
-## The FLex Zone
+# The FLex Zone(AKA themes)
 You can just toggle between these using the custom waybar Theme toggle
-#### Main Theme
+
+### Nebula Detph 
 <img src="./assets/desktop.png" alt="Full Desktop" width="800"/>
 
-#### Cyber Theme
+### r3d
 <img src="./assets/cyber-theme.png" alt="Full Desktop" width="800"/>
 
-#### Sunset Theme
-<img src="./assets/sunset-theme.png" alt="Full Desktop" width="800"/>
+#### Renaissance
+<img src="./assets/2025-10-30-150023_hyprshot.png" alt="Full Desktop" width="800"/>
 
-#### Morning Theme
-<img src="./assets/morning-theme.png" alt="Full Desktop" width="800"/>
+#### The Anatomy
+<img src="./assets/2025-10-30-150019_hyprshot.png" alt="Full Desktop" width="800"/>
+
 
 #### Foot Terminal 
 <img src="./assets/terminal.png" alt="Terminal" width="800"/>
@@ -46,14 +48,10 @@ You can just toggle between these using the custom waybar Theme toggle
 #### Wofi Launcher 
 <img src="./assets/wofi-launcher.png" alt="WofiLauncer" width="800"/>
 
-#### Wofi based theme picker
-- toggle terminal, hypr, waybar all together 
+#### Theme Picker Menu
+ <img src="./assets/theme-picker.png" alt="WofiLauncer" width="300"/>
 
 
-<img src="./assets/theme-picker.png" alt="WofiLauncer" width="800"/>
-
-#### Hyprland tiling windows 
-<img src="./assets/windows.png" alt="Windows" width="800"/>
 
 ## Licence 
 Take it and tweak it ion even care, still very minimal as i'm still finding my steps into Unix based OS

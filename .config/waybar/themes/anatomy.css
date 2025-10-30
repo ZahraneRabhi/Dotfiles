@@ -1,0 +1,74 @@
+@define-color fg #f5f0e8;
+/* bright white linen and ruffs */
+@define-color accent #d4b896;
+/* warm candlelit flesh tones */
+@define-color crimson #a84448;
+/* the exposed muscle tissue */
+@define-color gold #c89858;
+/* warm yellow book pages */
+@define-color dark #1a1612;
+/* deep shadow background */
+@define-color charcoal #2d2520;
+/* dark clothing */
+@define-color none transparent;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 16px;
+}
+
+window#waybar {
+    background-color: @none;
+    color: @fg;
+}
+
+/* Workspaces */
+#workspaces button {
+    padding: 0 6px;
+    margin: 0 2px;
+    color: @fg;
+    background: @none;
+    border: 1px solid rgba(212, 184, 150, 0.3);
+    border-radius: 6px;
+}
+
+#workspaces button.active {
+    color: @dark;
+    background: @accent;
+    border: 1px solid @gold;
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    color: @crimson;
+    border-color: @crimson;
+}
+
+/* Active window title */
+#window {
+    padding: 0 10px;
+    color: @accent;
+    font-weight: bold;
+}
+
+/* Modules */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 8px;
+    color: @fg;
+    background: @none;
+    border: none;
+}
