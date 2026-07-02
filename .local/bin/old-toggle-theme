@@ -20,11 +20,14 @@ THEMES=(
     "space-rings:$WALLPAPER_DIR/wallhaven-exj2mw.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-sunset.conf:$FOOT_DIR/sunset.ini"
     "mars:$WALLPAPER_DIR/wallhaven-l8eejy.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-sunset.conf:$FOOT_DIR/mars.ini"
 
-    "silver-surfer:$WALLPAPER_DIR/silver.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-cobalts.conf:$FOOT_DIR/cobalts.ini"
-    "space-window:$WALLPAPER_DIR/wallhaven-zp85do.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-cobalts.conf:$FOOT_DIR/cobalts.ini"
+    "silver-surfer:$WALLPAPER_DIR/silver.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/cobalts.ini"
+    "space-window:$WALLPAPER_DIR/wallhaven-zp85do.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/cobalts.ini"
     "cyber-lust:$WALLPAPER_DIR/wallhaven-yq8w5k.jpg:$WAYBAR_DIR/themes/cyber.css:$HYPR_THEMES_DIR/looks/look-cyber.conf:$FOOT_DIR/cyber.ini"
 
     "green-vinland:$WALLPAPER_DIR/wallhaven-qzwxgq.jpg:$WAYBAR_DIR/themes/green-vinland.css:$HYPR_THEMES_DIR/looks/look-green-vinland.conf:$FOOT_DIR/green-vinland.ini"
+
+    "cosmic:$WALLPAPER_DIR/wallhaven-vpp6d5.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/nebula.ini"
+
 )
 
 # Index state file

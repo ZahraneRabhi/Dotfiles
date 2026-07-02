@@ -1,0 +1,106 @@
+@define-color fg #d8ede8;
+@define-color bg rgba(4, 8, 18, 0.84);
+@define-color accent #2a9088;
+@define-color urgent #d07040;
+@define-color none transparent;
+
+/* ARCHETYPE: astronomical — 8px scientific clean, teal module pills, structured data-display feel */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+}
+
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 8px;
+    border: 1px solid rgba(42, 144, 136, 0.22);
+    box-shadow:
+        0 0 30px rgba(4, 8, 18, 0.90),
+        0 0 12px rgba(42, 144, 136, 0.12);
+    transition: all 0.4s ease;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 0 2px;
+    color: rgba(216, 237, 232, 0.42);
+    background: rgba(42, 144, 136, 0.04);
+    border: 1px solid rgba(42, 144, 136, 0.12);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    color: @fg;
+    background: rgba(42, 144, 136, 0.12);
+    border-color: rgba(42, 144, 136, 0.30);
+}
+
+#workspaces button.active {
+    color: #040812;
+    background: @accent;
+    border-color: rgba(216, 237, 232, 0.30);
+    font-weight: bold;
+    box-shadow: 0 0 8px rgba(42, 144, 136, 0.35);
+}
+
+#workspaces button.urgent {
+    color: @urgent;
+    border-color: @urgent;
+}
+
+#window {
+    padding: 0 10px;
+    color: rgba(216, 237, 232, 0.75);
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 8px;
+    margin: 2px 2px;
+    color: @fg;
+    background: rgba(42, 144, 136, 0.06);
+    border: 1px solid rgba(42, 144, 136, 0.10);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: #80ffe8;
+    background: rgba(42, 144, 136, 0.14);
+    border-color: rgba(42, 144, 136, 0.25);
+}
+
+#tray { padding-right: 12px; }
+#battery.warning { color: #d0a860; }
+#battery.critical { color: @urgent; }
+
+tooltip {
+    background: rgba(4, 8, 18, 0.96);
+    border: 1px solid rgba(42, 144, 136, 0.28);
+    border-radius: 6px;
+    color: @fg;
+}
+tooltip label { color: @fg; }

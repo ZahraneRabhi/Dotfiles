@@ -8,70 +8,158 @@ FOOT_DIR="$HOME/.config/foot"
 
 ACTIVE_HYPR="$HYPR_THEMES_DIR/look.conf"
 ACTIVE_FOOT="$FOOT_DIR/foot.ini"
+THEME_STATE="$HOME/.config/current-theme" # for waybar widget
+THUMB_DIR="$HOME/.cache/wallpaper-thumbs"
+mkdir -p "$THUMB_DIR"
 
 # --- Theme bundles ---
-# Format: name:wallpaper:waybar:hypr:foot
 THEMES=(
-    "Nebula Depth:$WALLPAPER_DIR/nebula.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/nebula.ini"
-    "Nebula Depth V.2:$WALLPAPER_DIR/nebula.png:$WAYBAR_DIR/themes/nebula.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/nebula.ini"
-    "Mount Blue:$WALLPAPER_DIR/blue_3.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-sky.conf:$FOOT_DIR/sky.ini"
-    "Mount Pinkerton :$WALLPAPER_DIR/wallhaven-d6r2qo.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-mountain.conf:$FOOT_DIR/mountain.ini"
-    "Celestial Ring:$WALLPAPER_DIR/wallhaven-exj2mw.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-sunset.conf:$FOOT_DIR/sunset.ini"
-    "Mars:$WALLPAPER_DIR/wallhaven-l8eejy.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-sunset.conf:$FOOT_DIR/mars.ini"
-    "Silver Surfer:$WALLPAPER_DIR/silver.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-cobalts.conf:$FOOT_DIR/cobalts.ini"
-    "Interstellar:$WALLPAPER_DIR/wallhaven-zp85do.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-cobalts.conf:$FOOT_DIR/cobalts.ini"
-    "R3D:$WALLPAPER_DIR/wallhaven-yq8w5k.jpg:$WAYBAR_DIR/themes/cyber.css:$HYPR_THEMES_DIR/looks/look-cyber.conf:$FOOT_DIR/cyber.ini"
-    "Litteral Vinland:$WALLPAPER_DIR/wallhaven-qzwxgq.jpg:$WAYBAR_DIR/themes/green-vinland.css:$HYPR_THEMES_DIR/looks/look-green-vinland.conf:$FOOT_DIR/green-vinland.ini"
-    "Renaissance:$WALLPAPER_DIR/wallhaven-x6vldd.jpg:$WAYBAR_DIR/themes/renaissance.css:$HYPR_THEMES_DIR/looks/look-renaissance.conf:$FOOT_DIR/renaissance.ini"
-    "The Anatomy :$WALLPAPER_DIR/wallhaven-8xxprk.jpg:$WAYBAR_DIR/themes/anatomy.css:$HYPR_THEMES_DIR/looks/look-anatomy.conf:$FOOT_DIR/anatomy.ini"
+  "THE BARROW-WIGHT:$WALLPAPER_DIR/wallhaven-5wxww8.jpg:$WAYBAR_DIR/themes/wight.css:$HYPR_THEMES_DIR/looks/look-wight.conf:$FOOT_DIR/wight.ini"
+  "RETRO GIRL:$WALLPAPER_DIR/wallhaven-6lwo6x.png:$WAYBAR_DIR/themes/retro.css:$HYPR_THEMES_DIR/looks/look-retro.conf:$FOOT_DIR/retro.ini"
+  "THE WANDERER'S ROAD:$WALLPAPER_DIR/wallhaven-d8w8y3.jpg:$WAYBAR_DIR/themes/wanderer.css:$HYPR_THEMES_DIR/looks/look-wanderer.conf:$FOOT_DIR/wanderer.ini"
+  "ENDLESS SIEGE:$WALLPAPER_DIR/wallhaven-qrll9r.jpg:$WAYBAR_DIR/themes/siege.css:$HYPR_THEMES_DIR/looks/look-siege.conf:$FOOT_DIR/siege.ini"
+  "SHINRA TENSEI:$WALLPAPER_DIR/wallhaven-yqe81l.png:$WAYBAR_DIR/themes/tensei.css:$HYPR_THEMES_DIR/looks/look-tensei.conf:$FOOT_DIR/tensei.ini"
+
+  "WESTWORLD:$WALLPAPER_DIR/wallhaven-eov8q8.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/generic.ini"
+  "I AM MUSIC:$WALLPAPER_DIR/IAMMUSIC.png:$WAYBAR_DIR/themes/corpo.css:$HYPR_THEMES_DIR/looks/look-corpo.conf:$FOOT_DIR/corpo.ini"
+  "STAR WARS:$WALLPAPER_DIR/wallhaven-ogggy5.jpg:$WAYBAR_DIR/themes/nebula.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/nebula.ini"
+  "MAN OF TOMMOROW:$WALLPAPER_DIR/wallhaven-472ql3.jpg:$WAYBAR_DIR/themes/nebula.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/nebula.ini"
+  "MAN OF STEEL:$WALLPAPER_DIR/wallhaven-yqx7kg.jpg:$WAYBAR_DIR/themes/cyber.css:$HYPR_THEMES_DIR/looks/look-cyber.conf:$FOOT_DIR/cyber.ini"
+  "Nebula Depth:$WALLPAPER_DIR/nebula.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/nebula.ini"
+  "Nebula Depth V.2:$WALLPAPER_DIR/nebula.png:$WAYBAR_DIR/themes/nebula.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/nebula.ini"
+  "Mount Blue:$WALLPAPER_DIR/blue_3.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-sky.conf:$FOOT_DIR/sky.ini"
+  "Death Star:$WALLPAPER_DIR/wallhaven-r29opj.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/generic.ini"
+  "Mount Bluer:$WALLPAPER_DIR/wallhaven-mlpll9.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-sky.conf:$FOOT_DIR/sky.ini"
+  "Mount Pinkerton:$WALLPAPER_DIR/wallhaven-d6r2qo.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-mountain.conf:$FOOT_DIR/nebula.ini"
+  "Silver Surfer:$WALLPAPER_DIR/silver.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/generic.ini"
+  "Interstellar:$WALLPAPER_DIR/wallhaven-zp85do.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-cobalts.conf:$FOOT_DIR/cobalts.ini"
+  "R3D:$WALLPAPER_DIR/wallhaven-yq8w5k.jpg:$WAYBAR_DIR/themes/cyber.css:$HYPR_THEMES_DIR/looks/look-cyber.conf:$FOOT_DIR/cyber.ini"
+  "ALL R3D:$WALLPAPER_DIR/wallhaven-gwq1w3.png:$WAYBAR_DIR/themes/cyber.css:$HYPR_THEMES_DIR/looks/look-cyber.conf:$FOOT_DIR/cyber.ini"
+  "REDDEST OF REDS:$WALLPAPER_DIR/wallhaven-e8edm8.jpg:$WAYBAR_DIR/themes/cyber.css:$HYPR_THEMES_DIR/looks/look-cyber.conf:$FOOT_DIR/cyber.ini"
+  "Edge Runners:$WALLPAPER_DIR/wallhaven-571998.png:$WAYBAR_DIR/themes/edge-runners.css:$HYPR_THEMES_DIR/looks/look-edgerunners.conf:$FOOT_DIR/edge-runners.ini"
+  "Blade Runner 2049:$WALLPAPER_DIR/wallhaven-2kv2j6.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/nebula.ini"
+  "GREENPATH:$WALLPAPER_DIR/wallhaven-je1lem.png:$WAYBAR_DIR/themes/green.css:$HYPR_THEMES_DIR/looks/look-green.conf:$FOOT_DIR/green-matrix.ini"
+  "Green Cream:$WALLPAPER_DIR/wallhaven-5yr3m1.jpg:$WAYBAR_DIR/themes/green.css:$HYPR_THEMES_DIR/looks/look-green.conf:$FOOT_DIR/green-matrix.ini"
+  "BlU3:$WALLPAPER_DIR/wallhaven-6l5emq.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/nebula.ini"
+  "Tree House:$WALLPAPER_DIR/wallhaven-391kj9.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/green-vinland.ini"
+  "Dune:$WALLPAPER_DIR/wallhaven-vqrgj8.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/generic.ini"
+  "Last Shinobi:$WALLPAPER_DIR/wallhaven-9o8lg8.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/generic.ini"
+  "Jougan:$WALLPAPER_DIR/456934.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/generic.ini"
+  "Litteral Vinland:$WALLPAPER_DIR/wallhaven-qzwxgq.jpg:$WAYBAR_DIR/themes/green-vinland.css:$HYPR_THEMES_DIR/looks/look-green-vinland.conf:$FOOT_DIR/green-vinland.ini"
+  "Renaissance:$WALLPAPER_DIR/wallhaven-x6vldd.jpg:$WAYBAR_DIR/themes/renaissance.css:$HYPR_THEMES_DIR/looks/look-renaissance.conf:$FOOT_DIR/renaissance.ini"
+  "MIDDLE EARTH:$WALLPAPER_DIR/wallhaven-4l3q6l.jpg:$WAYBAR_DIR/themes/medieval.css:$HYPR_THEMES_DIR/looks/look-renaissance.conf:$FOOT_DIR/medieval.ini"
+  "The Anatomy:$WALLPAPER_DIR/wallhaven-8xxprk.jpg:$WAYBAR_DIR/themes/anatomy.css:$HYPR_THEMES_DIR/looks/look-anatomy.conf:$FOOT_DIR/anatomy.ini"
+  "Cosmic Hive:$WALLPAPER_DIR/wallhaven-vpp6d5.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/nebula.ini"
+  "Gotham:$WALLPAPER_DIR/wallhaven-yq55q7.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/cyber.ini"
+  "ROAD:$WALLPAPER_DIR/wallhaven-gw22el.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/generic.ini"
+  "Sun Fall:$WALLPAPER_DIR/wallhaven-d61yjo.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/nebula.ini"
+
+  # --- New Themes ---
+  "KARMA SEAL:$WALLPAPER_DIR/394049.jpg:$WAYBAR_DIR/themes/karma-seal.css:$HYPR_THEMES_DIR/looks/look-karma-seal.conf:$FOOT_DIR/karma-seal.ini"
+  "STARGAZER:$WALLPAPER_DIR/blue_1.png:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-cobalts.conf:$FOOT_DIR/cobalts.ini"
+  "INDIGO PETAL:$WALLPAPER_DIR/p3.jpg:$WAYBAR_DIR/themes/indigo-petal.css:$HYPR_THEMES_DIR/looks/look-indigo-petal.conf:$FOOT_DIR/indigo-petal.ini"
+  "TWILIGHT REVERIE:$WALLPAPER_DIR/p4.png:$WAYBAR_DIR/themes/twilight.css:$HYPR_THEMES_DIR/looks/look-twilight.conf:$FOOT_DIR/twilight.ini"
+  "UNDEAD LEGION:$WALLPAPER_DIR/skeleton.jpg:$WAYBAR_DIR/themes/undead-legion.css:$HYPR_THEMES_DIR/looks/look-undead-legion.conf:$FOOT_DIR/undead-legion.ini"
+  "THE CARTOGRAPHER:$WALLPAPER_DIR/wallhaven-0jk99y.jpg:$WAYBAR_DIR/themes/cartographer.css:$HYPR_THEMES_DIR/looks/look-cartographer.conf:$FOOT_DIR/cartographer.ini"
+  "PULP FICTION:$WALLPAPER_DIR/wallhaven-0jr23m.jpg:$WAYBAR_DIR/themes/pulp-fiction.css:$HYPR_THEMES_DIR/looks/look-pulp-fiction.conf:$FOOT_DIR/pulp-fiction.ini"
+  "INFERNAL RITE:$WALLPAPER_DIR/wallhaven-21312y.jpg:$WAYBAR_DIR/themes/infernal.css:$HYPR_THEMES_DIR/looks/look-infernal.conf:$FOOT_DIR/infernal.ini"
+  "GOLDEN HOUR:$WALLPAPER_DIR/wallhaven-21ke9m.jpg:$WAYBAR_DIR/themes/golden-hour.css:$HYPR_THEMES_DIR/looks/look-golden-hour.conf:$FOOT_DIR/golden-hour.ini"
+  "CUMULONIMBUS:$WALLPAPER_DIR/wallhaven-3qkzqv.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-sky.conf:$FOOT_DIR/sky.ini"
+  "CODE RAIN:$WALLPAPER_DIR/wallhaven-3zgz2y.png:$WAYBAR_DIR/themes/code-rain.css:$HYPR_THEMES_DIR/looks/look-code-rain.conf:$FOOT_DIR/code-rain.ini"
+  "JOI:$WALLPAPER_DIR/wallhaven-73ml69.png:$WAYBAR_DIR/themes/joi.css:$HYPR_THEMES_DIR/looks/look-joi.conf:$FOOT_DIR/joi.ini"
+  "GRUNWALD:$WALLPAPER_DIR/wallhaven-7jgx8e.jpg:$WAYBAR_DIR/themes/medieval.css:$HYPR_THEMES_DIR/looks/look-renaissance.conf:$FOOT_DIR/medieval.ini"
+  "FURY ROAD:$WALLPAPER_DIR/wallhaven-85m1zo.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-sunset.conf:$FOOT_DIR/sunset.ini"
+  "LUNAR CRESCENT:$WALLPAPER_DIR/wallhaven-8g5qr2.png:$WAYBAR_DIR/themes/lunar.css:$HYPR_THEMES_DIR/looks/look-lunar.conf:$FOOT_DIR/lunar.ini"
+  "THE HEMLOCK CUP:$WALLPAPER_DIR/wallhaven-d8wo8m.jpg:$WAYBAR_DIR/themes/renaissance.css:$HYPR_THEMES_DIR/looks/look-renaissance.conf:$FOOT_DIR/renaissance.ini"
+  "EVIL MELODIES:$WALLPAPER_DIR/wallhaven-dgo59l.jpg:$WAYBAR_DIR/themes/lunar.css:$HYPR_THEMES_DIR/looks/look-lunar.conf:$FOOT_DIR/lunar.ini"
+  "THE DARK KNIGHT:$WALLPAPER_DIR/wallhaven-e8xqxk.png:$WAYBAR_DIR/themes/lunar.css:$HYPR_THEMES_DIR/looks/look-lunar.conf:$FOOT_DIR/lunar.ini"
+  "EYE OF SAURON:$WALLPAPER_DIR/wallhaven-eo28xl.png:$WAYBAR_DIR/themes/medieval.css:$HYPR_THEMES_DIR/looks/look-renaissance.conf:$FOOT_DIR/medieval.ini"
+  "WARP SPEED:$WALLPAPER_DIR/wallhaven-exj2mw.jpg:$WAYBAR_DIR/themes/warp.css:$HYPR_THEMES_DIR/looks/look-warp.conf:$FOOT_DIR/warp.ini"
+  "GOLDEN DEPARTURE:$WALLPAPER_DIR/wallhaven-gwpgv3.jpg:$WAYBAR_DIR/themes/wanderer.css:$HYPR_THEMES_DIR/looks/look-wanderer.conf:$FOOT_DIR/wanderer.ini"
+  "CRIMSON MOON:$WALLPAPER_DIR/wallhaven-jex9dy.jpg:$WAYBAR_DIR/themes/crimson-moon.css:$HYPR_THEMES_DIR/looks/look-crimson-moon.conf:$FOOT_DIR/crimson-moon.ini"
+  "RED PLANET:$WALLPAPER_DIR/wallhaven-l8eejy.jpg:$WAYBAR_DIR/themes/crimson-moon.css:$HYPR_THEMES_DIR/looks/look-crimson-moon.conf:$FOOT_DIR/crimson-moon.ini"
+  "MAN OF HOPE:$WALLPAPER_DIR/wallhaven-ly3yzl.jpg:$WAYBAR_DIR/themes/warp.css:$HYPR_THEMES_DIR/looks/look-warp.conf:$FOOT_DIR/warp.ini"
+  "EAGLE NEBULA:$WALLPAPER_DIR/wallhaven-lyq5or.jpg:$WAYBAR_DIR/themes/eagle-nebula.css:$HYPR_THEMES_DIR/looks/look-eagle-nebula.conf:$FOOT_DIR/eagle-nebula.ini"
+  "DR. MANHATTAN:$WALLPAPER_DIR/wallhaven-m3kkrm.png:$WAYBAR_DIR/themes/manhattan.css:$HYPR_THEMES_DIR/looks/look-manhattan.conf:$FOOT_DIR/manhattan.ini"
+  "THE NAZGUL:$WALLPAPER_DIR/wallhaven-m3x62m.jpg:$WAYBAR_DIR/themes/infernal.css:$HYPR_THEMES_DIR/looks/look-infernal.conf:$FOOT_DIR/infernal.ini"
+  "KYLO REN:$WALLPAPER_DIR/wallhaven-ne1j5k.png:$WAYBAR_DIR/themes/crimson-moon.css:$HYPR_THEMES_DIR/looks/look-crimson-moon.conf:$FOOT_DIR/crimson-moon.ini"
+  "TRINITY:$WALLPAPER_DIR/wallhaven-p8lor9.jpg:$WAYBAR_DIR/themes/transparent.css:$HYPR_THEMES_DIR/looks/look-transparent.conf:$FOOT_DIR/generic.ini"
+  "NEPTUNE:$WALLPAPER_DIR/wallhaven-polllj.jpg:$WAYBAR_DIR/themes/manhattan.css:$HYPR_THEMES_DIR/looks/look-manhattan.conf:$FOOT_DIR/manhattan.ini"
+  "QUIET AFTERNOON:$WALLPAPER_DIR/wallhaven-qzw7dl.jpg:$WAYBAR_DIR/themes/renaissance.css:$HYPR_THEMES_DIR/looks/look-renaissance.conf:$FOOT_DIR/renaissance.ini"
+  "ROSE SUMMIT:$WALLPAPER_DIR/wallhaven-rr8wzj.jpg:$WAYBAR_DIR/themes/rose-summit.css:$HYPR_THEMES_DIR/looks/look-rose-summit.conf:$FOOT_DIR/rose-summit.ini"
+  "ITACHI:$WALLPAPER_DIR/wallhaven-vgv7jm.png:$WAYBAR_DIR/themes/crimson-moon.css:$HYPR_THEMES_DIR/looks/look-crimson-moon.conf:$FOOT_DIR/crimson-moon.ini"
+  "ROSE NEBULA:$WALLPAPER_DIR/wallhaven-xe8ggz.jpg:$WAYBAR_DIR/themes/rose-nebula.css:$HYPR_THEMES_DIR/looks/look-rose-nebula.conf:$FOOT_DIR/rose-nebula.ini"
+  "SAKURA BLADE:$WALLPAPER_DIR/wallhaven-xlp9p3.jpg:$WAYBAR_DIR/themes/sakura.css:$HYPR_THEMES_DIR/looks/look-sakura.conf:$FOOT_DIR/sakura.ini"
+  "VOID CONTOURS:$WALLPAPER_DIR/wallhaven-x6m913.jpg:$WAYBAR_DIR/themes/lunar.css:$HYPR_THEMES_DIR/looks/look-lunar.conf:$FOOT_DIR/lunar.ini"
+  "NEON ALLEY:$WALLPAPER_DIR/wallhaven-y8zr5g.png:$WAYBAR_DIR/themes/neon-alley.css:$HYPR_THEMES_DIR/looks/look-neon-alley.conf:$FOOT_DIR/neon-alley.ini"
+  "EVANGELION:$WALLPAPER_DIR/wallhaven-yqmlmx.png:$WAYBAR_DIR/themes/evangelion.css:$HYPR_THEMES_DIR/looks/look-evangelion.conf:$FOOT_DIR/evangelion.ini"
+  "RED CAPE:$WALLPAPER_DIR/wallhaven-yqx7kg (1).jpg:$WAYBAR_DIR/themes/crimson-moon.css:$HYPR_THEMES_DIR/looks/look-crimson-moon.conf:$FOOT_DIR/crimson-moon.ini"
+  "CUPHEAD:$WALLPAPER_DIR/wallhaven-zmdx1j.jpg:$WAYBAR_DIR/themes/lunar.css:$HYPR_THEMES_DIR/looks/look-lunar.conf:$FOOT_DIR/lunar.ini"
+  "RED:$WALLPAPER_DIR/evil_jordan.png:$WAYBAR_DIR/themes/crimson-moon.css:$HYPR_THEMES_DIR/looks/look-crimson-moon.conf:$FOOT_DIR/crimson-moon.ini"
 )
 
+# --- Wofi menu with wallpaper previews ---
+generate_wofi_items() {
+  for entry in "${THEMES[@]}"; do
+    IFS=":" read -r NAME WALLPAPER WAYBAR_THEME HYPR_THEME FOOT_THEME <<<"$entry"
+    SAFE_NAME=$(printf "%s" "$NAME" | tr -cs '[:alnum:]' '_')
+    THUMB="$THUMB_DIR/${SAFE_NAME}.png"
+    if [[ ! -f "$THUMB" && -f "$WALLPAPER" ]]; then
+      ffmpeg -i "$WALLPAPER" \
+        -vf "scale=200:112:force_original_aspect_ratio=decrease,pad=200:112:(ow-iw)/2:(oh-ih)/2:color=black" \
+        -frames:v 1 "$THUMB" -y -loglevel quiet 2>/dev/null
+    fi
+    if [[ -f "$THUMB" ]]; then
+      printf "img:%s:text:%s\n" "$THUMB" "$NAME"
+    else
+      printf "%s\n" "$NAME"
+    fi
+  done
+}
 
-# --- Wofi menu ---
-# Extract just theme names for menu
-THEME_NAMES=()
-for item in "${THEMES[@]}"; do
-    THEME_NAMES+=("$(echo "$item" | cut -d':' -f1)")
-done
+SELECTED=$(generate_wofi_items |
+  wofi --dmenu \
+    --allow-images \
+    --prompt "Select Theme" \
+    --width 820 \
+    --height 600 \
+    --lines 10 \
+    --columns 2 \
+    --cache-file /dev/null |
+  sed 's|^img:[^:]*:text:||')
 
-# Use Wofi to select theme
-SELECTED=$(printf "%s\n" "${THEME_NAMES[@]}" | wofi --dmenu --prompt "Select Theme" --width 400 --height 600 --lines ${#THEME_NAMES[@]} --columns 1 --cache-file /dev/null)
-
-# If user cancelled, exit
 [ -z "$SELECTED" ] && exit 0
 
-# --- Find the selected theme bundle ---
+# --- Apply selected theme ---
 for entry in "${THEMES[@]}"; do
-    IFS=":" read -r NAME WALLPAPER WAYBAR_THEME HYPR_THEME FOOT_THEME <<< "$entry"
-    if [[ "$NAME" == "$SELECTED" ]]; then
-        # Apply Waybar theme
-        ln -sf "$WAYBAR_THEME" "$WAYBAR_DIR/style.css"
+  IFS=":" read -r NAME WALLPAPER WAYBAR_THEME HYPR_THEME FOOT_THEME <<<"$entry"
+  if [[ "$NAME" == "$SELECTED" ]]; then
 
-        # Apply Hyprland theme
-        ln -sf "$HYPR_THEME" "$ACTIVE_HYPR"
+    # Apply symlinks
+    ln -sf "$WAYBAR_THEME" "$WAYBAR_DIR/style.css"
+    ln -sf "$HYPR_THEME" "$ACTIVE_HYPR"
+    ln -sf "$FOOT_THEME" "$ACTIVE_FOOT"
+    #pkill -x foot 2>/dev/null
 
-        # Apply Foot theme
-        ln -sf "$FOOT_THEME" "$ACTIVE_FOOT"
-        pkill -x foot 2>/dev/null
+    # Apply wallpaper — preload once, set per monitor
+    hyprctl hyprpaper preload "$WALLPAPER"
+    for monitor in $(hyprctl monitors -j | jq -r '.[].name'); do
+      hyprctl hyprpaper wallpaper "$monitor,$WALLPAPER"
+    done
 
-        # Apply wallpaper to all monitors
-        for monitor in $(hyprctl monitors -j | jq -r '.[].name'); do
-            hyprctl hyprpaper preload "$WALLPAPER"
-            hyprctl hyprpaper wallpaper "$monitor,$WALLPAPER"
-        done
+    # Write state for Waybar widget (triggers inotifywait instantly)
+    echo "$NAME" >"$THEME_STATE"
 
-        # Restart Waybar
-        if pgrep -x waybar >/dev/null; then
-            pkill -x waybar
-            while pgrep -x waybar >/dev/null; do sleep 0.1; done
-        fi
-        nohup waybar >/dev/null 2>&1 &
+    # Reload Hyprland config
+    hyprctl reload
 
-        # Reload Hyprland
-        hyprctl reload
+    # Restart Waybar cleanly
+    pkill -x waybar 2>/dev/null
+    sleep 0.5
+    nohup waybar >/dev/null 2>&1 &
+    disown
 
-        # Notify
-        notify-send "Theme switched" "Now using: $NAME"
-        break
-    fi
+    notify-send "Theme switched" "Now using: $NAME"
+    break
+  fi
 done

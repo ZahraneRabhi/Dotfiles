@@ -3,11 +3,11 @@
 STATE="${XDG_RUNTIME_DIR:-/tmp}/toggle-nightlight.state"
 
 # Initialize if missing
-[ ! -f "$STATE" ] && echo "off" > "$STATE"
+[ ! -f "$STATE" ] && echo "off" >"$STATE"
 
 if [ "$(cat "$STATE")" = "on" ]; then
-    echo "Exposed 󰖨"  # sun icon
+  echo "WICKED 󰮇" # sun icon
 else
-    echo "Stealth "  # moon icon (Papirus/Nerd Font)
+  echo "BLESSED " # moon icon (Papirus/Nerd Font)
 
 fi

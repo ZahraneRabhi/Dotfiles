@@ -1,0 +1,103 @@
+@define-color fg #f8e8e0;
+@define-color bg rgba(6, 0, 2, 0.98);
+@define-color accent #cc0020;
+@define-color urgent #ff0030;
+@define-color none transparent;
+
+/* ARCHETYPE: blood moon — 0px absolute sharp, deep crimson hemorrhage glow, text dims to bone */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 15px;
+}
+
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 0px;
+    border: none;
+    border-bottom: 1px solid rgba(204, 0, 32, 0.50);
+    box-shadow:
+        0 4px 40px rgba(204, 0, 32, 0.18),
+        0 0 80px rgba(6, 0, 2, 0.90);
+    transition: box-shadow 0.4s ease;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 0 1px;
+    color: rgba(248, 232, 224, 0.28);
+    background: transparent;
+    border: none;
+    border-radius: 0px;
+    transition: all 0.20s ease;
+}
+
+#workspaces button:hover {
+    color: rgba(248, 232, 224, 0.75);
+    background: rgba(204, 0, 32, 0.10);
+}
+
+#workspaces button.active {
+    color: #f8e8e0;
+    background: transparent;
+    box-shadow: inset 0 0 0 1px rgba(204, 0, 32, 0.60);
+    text-shadow: 0 0 10px rgba(255, 0, 48, 0.70);
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    color: @urgent;
+    text-shadow: 0 0 8px rgba(255, 0, 48, 0.90);
+}
+
+#window {
+    padding: 0 10px;
+    color: rgba(248, 232, 224, 0.70);
+    text-shadow: 0 0 8px rgba(204, 0, 32, 0.40);
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 9px;
+    color: rgba(248, 232, 224, 0.60);
+    background: transparent;
+    border: none;
+    transition: color 0.20s ease, text-shadow 0.20s ease;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: #ff4060;
+    text-shadow: 0 0 8px rgba(204, 0, 32, 0.60);
+}
+
+#tray { padding-right: 12px; }
+#battery.warning { color: #cc4020; }
+#battery.critical { color: @urgent; text-shadow: 0 0 10px rgba(255, 0, 48, 0.80); }
+
+tooltip {
+    background: rgba(6, 0, 2, 0.99);
+    border: 1px solid rgba(204, 0, 32, 0.45);
+    border-radius: 0px;
+    color: @fg;
+}
+tooltip label { color: @fg; }

@@ -1,0 +1,100 @@
+@define-color fg #e8d8f8;
+@define-color bg rgba(6, 4, 20, 0.60);
+@define-color accent #e080c0;
+@define-color urgent #f090d0;
+@define-color none transparent;
+
+/* ARCHETYPE: mountain dusk — 18px, ultra-transparent, near-invisible bar, peaceful rose breath */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 15px;
+}
+
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 18px;
+    border: 1px solid rgba(224, 128, 192, 0.14);
+    box-shadow:
+        0 0 50px rgba(224, 128, 192, 0.12),
+        inset 0 1px 0 rgba(255, 200, 240, 0.06);
+    transition: all 0.5s ease;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    margin: 0 4px;
+    color: rgba(232, 216, 248, 0.38);
+    background: transparent;
+    border: none;
+    border-radius: 18px;
+    transition: all 0.35s ease;
+}
+
+#workspaces button:hover {
+    color: rgba(232, 216, 248, 0.80);
+    background: rgba(224, 128, 192, 0.10);
+}
+
+#workspaces button.active {
+    color: @fg;
+    background: rgba(224, 128, 192, 0.18);
+    font-weight: bold;
+    box-shadow: 0 0 14px rgba(224, 128, 192, 0.22);
+}
+
+#workspaces button.urgent {
+    color: @urgent;
+}
+
+#window {
+    padding: 0 14px;
+    color: rgba(232, 216, 248, 0.65);
+    text-shadow: 0 0 16px rgba(224, 128, 192, 0.35);
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 10px;
+    color: rgba(232, 216, 248, 0.58);
+    background: transparent;
+    border: none;
+    transition: color 0.35s ease;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: @accent;
+    text-shadow: 0 0 10px rgba(224, 128, 192, 0.45);
+}
+
+#tray { padding-right: 14px; }
+#battery.warning { color: rgba(232, 160, 210, 0.90); }
+#battery.critical { color: @urgent; }
+
+tooltip {
+    background: rgba(6, 4, 20, 0.90);
+    border: 1px solid rgba(224, 128, 192, 0.20);
+    border-radius: 14px;
+    color: @fg;
+}
+tooltip label { color: @fg; }

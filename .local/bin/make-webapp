@@ -6,7 +6,7 @@ read -p "App URL: " URL
 read -p "Icon (path or system icon name, leave blank for web-browser): " ICON
 
 # fallback if no icon entered
-[ -z "$ICON" ] && ICON="web-browser"
+[-z "$ICON" ] && ICON="web-browser"
 
 FILE=~/.local/share/applications/$(echo "$NAME" | tr ' ' '-' | tr '[:upper:]' '[:lower:]').desktop
 

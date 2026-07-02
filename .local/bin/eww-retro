@@ -1,0 +1,61 @@
+#!/bin/bash
+# Toggle/manage eww retro-girl bar
+# Usage: eww-retro [start|stop|toggle]
+
+WALLPAPER="$HOME/Pictures/Wallpapers/wallhaven-6lwo6x.png"
+FOOT_THEME="$HOME/.config/foot/retro.ini"
+HYPR_LOOK="$HOME/.config/hypr/hyprland-modules/looks/look-retro.conf"
+
+eww_running() {
+  eww ping &>/dev/null
+}
+
+start_eww() {
+  # Apply retro-girl wallpaper + look configs
+  hyprctl hyprpaper unload all 2>/dev/null
+  hyprctl hyprpaper preload "$WALLPAPER" 2>/dev/null
+  hyprctl hyprpaper wallpaper ",$WALLPAPER" 2>/dev/null
+
+  # Apply Hypr look (colors, rounding, etc.)
+  if [[ -f "$HYPR_LOOK" ]]; then
+    hyprctl keyword source "$HYPR_LOOK" 2>/dev/null
+  fi
+
+  # Update foot terminal theme
+  if [[ -f "$FOOT_THEME" ]]; then
+    cp "$FOOT_THEME" "$HOME/.config/foot/colors.ini"
+  fi
+
+  # Stop waybar, start eww
+  pkill -x waybar 2>/dev/null
+  sleep 0.3
+  eww open retro-bar
+
+  echo "eww retro bar started"
+}
+
+stop_eww() {
+  eww close retro-bar 2>/dev/null
+  eww kill 2>/dev/null
+  sleep 0.2
+  # Restore waybar
+  waybar &
+  disown
+  echo "eww stopped, waybar restored"
+}
+
+case "${1:-toggle}" in
+  start)  start_eww ;;
+  stop)   stop_eww ;;
+  toggle)
+    if eww_running 2>/dev/null && eww windows 2>/dev/null | grep -q "retro-bar"; then
+      stop_eww
+    else
+      start_eww
+    fi
+    ;;
+  *)
+    echo "Usage: eww-retro [start|stop|toggle]"
+    exit 1
+    ;;
+esac

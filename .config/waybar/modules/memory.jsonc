@@ -1,5 +1,6 @@
 {
   "memory": {
-    "format": "MEM: {used}GiB"
+    "format": "MEM: {used}GiB",
+    "interval": 30
   }
 }

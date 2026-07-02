@@ -1,0 +1,21 @@
+#!/bin/bash
+bat=$(ls /sys/class/power_supply/BAT* 2>/dev/null | head -1)
+if [[ -z "$bat" ]]; then
+  echo " AC"
+  exit
+fi
+
+cap=$(cat "$bat/capacity" 2>/dev/null || echo "?")
+status=$(cat "$bat/status" 2>/dev/null || echo "Unknown")
+
+if [[ "$status" == "Charging" ]]; then
+  echo " ${cap}%"
+elif [[ "$cap" =~ ^[0-9]+$ ]] && (( cap < 15 )); then
+  echo " ${cap}%"
+elif [[ "$cap" =~ ^[0-9]+$ ]] && (( cap < 40 )); then
+  echo " ${cap}%"
+elif [[ "$cap" =~ ^[0-9]+$ ]] && (( cap < 75 )); then
+  echo " ${cap}%"
+else
+  echo " ${cap}%"
+fi

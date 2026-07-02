@@ -1,0 +1,95 @@
+@define-color fg #d8d8d8;
+@define-color bg rgba(0, 0, 0, 0.80);
+@define-color accent #909090;
+@define-color urgent #e0e0e0;
+@define-color none transparent;
+
+/* ARCHETYPE: zen minimal — 20px, near-zero decoration, airy spacing, no glow anywhere */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 15px;
+}
+
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 20px;
+    border: 1px solid rgba(140, 140, 140, 0.12);
+    box-shadow: none;
+    transition: background-color 0.5s ease;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    margin: 0 4px;
+    color: rgba(216, 216, 216, 0.35);
+    background: transparent;
+    border: none;
+    border-radius: 20px;
+    transition: all 0.35s ease;
+}
+
+#workspaces button:hover {
+    color: rgba(216, 216, 216, 0.70);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+#workspaces button.active {
+    color: @fg;
+    background: rgba(255, 255, 255, 0.10);
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    color: @urgent;
+}
+
+#window {
+    padding: 0 14px;
+    color: rgba(216, 216, 216, 0.65);
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 12px;
+    color: rgba(216, 216, 216, 0.55);
+    background: transparent;
+    border: none;
+    transition: color 0.35s ease;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: @fg;
+}
+
+#tray { padding-right: 14px; }
+#battery.warning { color: rgba(216, 216, 216, 0.80); }
+#battery.critical { color: @urgent; }
+
+tooltip {
+    background: rgba(0, 0, 0, 0.92);
+    border: 1px solid rgba(140, 140, 140, 0.16);
+    border-radius: 16px;
+    color: @fg;
+}
+tooltip label { color: @fg; }

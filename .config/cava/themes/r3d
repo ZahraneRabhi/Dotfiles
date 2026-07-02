@@ -1,0 +1,20 @@
+[color]
+background = '#0a0014'        ; dark purple-black base
+foreground = '#ff0055'        ; neon magenta text (if used)
+
+gradient = 1
+gradient_color_1 = '#ff0055'  ; hot magenta
+gradient_color_2 = '#ff1e00'  ; crimson red
+gradient_color_3 = '#ff6600'  ; orange glow
+gradient_color_4 = '#ff0099'  ; pinkish violet
+gradient_color_5 = '#a000ff'  ; neon purple
+gradient_color_6 = '#4b00ff'  ; indigo purple core
+gradient_color_7 = '#ff3366'  ; magenta-red midtone
+gradient_color_8 = '#ff9933'  ; orange highlight
+
+horizontal_gradient = 1
+horizontal_gradient_color_1 = '#ff0055'  ; left glow
+horizontal_gradient_color_2 = '#ff1e00'  ; middle heat
+horizontal_gradient_color_3 = '#ff6600'  ; right warmth
+
+blend_direction = 'up'

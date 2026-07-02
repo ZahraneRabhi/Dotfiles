@@ -1,0 +1,9 @@
+#!/bin/bash
+# Stream player status (Playing / Paused / Stopped) via playerctl --follow
+
+status=$(playerctl status 2>/dev/null || echo "Stopped")
+echo "$status"
+
+playerctl status --follow 2>/dev/null | while IFS= read -r line; do
+  echo "$line"
+done

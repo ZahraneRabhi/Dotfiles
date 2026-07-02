@@ -1,0 +1,110 @@
+@define-color fg #d0c8b8;
+@define-color bg rgba(8, 6, 4, 0.97);
+@define-color accent #a06020;
+@define-color urgent #c84010;
+@define-color none transparent;
+
+/* ARCHETYPE: occult fire — 0px sharp, ember glow bleeding from bottom, dark copper module fills */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 15px;
+}
+
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 0px;
+    border: none;
+    border-top: 1px solid rgba(160, 96, 32, 0.25);
+    box-shadow:
+        0 6px 30px rgba(200, 64, 16, 0.20),
+        0 2px 60px rgba(8, 6, 4, 0.95),
+        inset 0 -1px 0 rgba(200, 80, 20, 0.30);
+    transition: all 0.4s ease;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 0 2px;
+    color: rgba(208, 200, 184, 0.40);
+    background: rgba(80, 48, 16, 0.10);
+    border: 1px solid rgba(160, 96, 32, 0.12);
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    color: @fg;
+    background: rgba(160, 96, 32, 0.16);
+    border-color: rgba(200, 80, 20, 0.40);
+    box-shadow: 0 0 8px rgba(200, 64, 16, 0.25);
+}
+
+#workspaces button.active {
+    color: #f0c080;
+    background: rgba(160, 96, 32, 0.25);
+    border-color: rgba(200, 80, 20, 0.60);
+    box-shadow: 0 0 14px rgba(200, 64, 16, 0.35);
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    color: @urgent;
+    border-color: @urgent;
+    box-shadow: 0 0 10px rgba(200, 64, 16, 0.50);
+}
+
+#window {
+    padding: 0 10px;
+    color: rgba(208, 200, 184, 0.85);
+    font-weight: bold;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 9px;
+    margin: 2px 1px;
+    color: rgba(208, 200, 184, 0.72);
+    background: rgba(60, 36, 12, 0.20);
+    border: 1px solid rgba(160, 96, 32, 0.10);
+    border-radius: 2px;
+    transition: all 0.2s ease;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: #f0c080;
+    background: rgba(160, 96, 32, 0.20);
+    box-shadow: 0 0 6px rgba(200, 64, 16, 0.20);
+}
+
+#tray { padding-right: 12px; }
+#battery.warning { color: #d08030; }
+#battery.critical { color: @urgent; }
+
+tooltip {
+    background: rgba(8, 6, 4, 0.99);
+    border: 1px solid rgba(160, 96, 32, 0.35);
+    border-radius: 0px;
+    color: @fg;
+}
+tooltip label { color: @fg; }

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+OPTIONS=(
+    "󰌾 Lock"
+    "󰜉 Reboot"
+    "⏻ Poweroff"
+)
+
+SELECTED=$(printf "%s\n" "${OPTIONS[@]}" | wofi \
+    --dmenu \
+    --prompt "" \
+    --width 220 \
+    --height 360 \
+    --lines 4 \
+    --hide-search \
+    --cache-file /dev/null)
+
+[ -z "$SELECTED" ] && exit 0
+
+case "$SELECTED" in
+    *Lock) hyprlock ;;
+    *Reboot) systemctl reboot ;;
+    *Poweroff) systemctl poweroff ;;
+esac

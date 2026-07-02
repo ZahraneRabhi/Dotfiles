@@ -1,15 +1,15 @@
 {
     "mpris": {
         "format": "{player_icon} {title}",
-        "format-paused": " {title}",
-        "format-stopped": " Stopped",
+        "format-paused": " {title}",
+        "format-stopped": " Stopped",
         "max-length": 18,
         "ellipsis": "{player_icon}",
         "player-icons": {
-            "default": "",
+            "default": "",
             "mpv": "🎬",
             "vlc": "󰕼",
-            "spotify": ""
+            "spotify": ""
         },
         "on-click": "playerctl play-pause"
     }

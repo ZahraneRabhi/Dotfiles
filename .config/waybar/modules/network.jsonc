@@ -1,7 +1,7 @@
 {
     "network": {
-        "format": "  Online",
-        "format-disconnected": "睊  Disconnected ⚠",
+        "format": "󰤨  Online",
+        "format-disconnected": "睊  Disconnected ⚠",
         "on-click": "foot -e nmtui"
     }
 }

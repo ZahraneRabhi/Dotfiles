@@ -1,0 +1,102 @@
+@define-color fg #e8e0c8;
+/* canvas cream — painted daylight text */
+@define-color bg rgba(30, 32, 24, 0.85);
+/* deep pine glass background */
+@define-color accent #c8a040;
+/* harvest gold for active items */
+@define-color urgent #a06030;
+/* burnt sienna for urgent state */
+@define-color none transparent;
+
+/* === Base Font === */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 16px;
+}
+
+/* === Waybar Core === */
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 10px;
+    border: 1px solid rgba(200, 160, 64, 0.28);
+    /* warm gold — afternoon sun frame */
+    box-shadow: 0 0 14px rgba(30, 32, 24, 0.80);
+    /* grounded earth shadow */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* === Workspaces === */
+#workspaces button {
+    padding: 0 6px;
+    margin: 0 3px;
+    color: @fg;
+    background: rgba(24, 26, 18, 0.55);
+    border: 1px solid rgba(200, 160, 64, 0.14);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+#workspaces button:hover {
+    background: rgba(200, 160, 64, 0.12);
+    border-color: rgba(200, 160, 64, 0.35);
+    box-shadow: 0 0 8px rgba(200, 160, 64, 0.28);
+}
+
+#workspaces button.active {
+    color: #1e2018;
+    background: @accent;
+    border: 1px solid @accent;
+    font-weight: bold;
+    box-shadow: 0 0 12px rgba(200, 160, 64, 0.42);
+}
+
+#workspaces button.urgent {
+    color: @urgent;
+    border-color: @urgent;
+    box-shadow: 0 0 10px rgba(160, 96, 48, 0.48);
+}
+
+/* === Active Window Title === */
+#window {
+    padding: 0 10px;
+    color: @fg;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(200, 160, 64, 0.32);
+}
+
+/* === Modules === */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 8px;
+    color: @fg;
+    background: transparent;
+    border: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* === Hover & Glow Effects === */
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: @accent;
+    text-shadow: 0 0 10px rgba(200, 160, 64, 0.50);
+}

@@ -1,0 +1,101 @@
+@define-color fg #e6edf3;
+/* soft light text */
+
+@define-color bg rgba(18, 20, 26, 0.95);
+/* deep charcoal background */
+
+@define-color accent #5a8cff;
+/* calm blue focus accent */
+
+@define-color urgent #ff6b6b;
+/* alert red */
+
+@define-color surface rgba(35, 38, 48, 0.9);
+/* subtle module surface */
+
+@define-color border rgba(120, 140, 170, 0.2);
+@define-color none transparent;
+
+/* === Base Font === */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 16px;
+}
+
+/* === Waybar Core === */
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border: 1px solid @border;
+    transition: background-color 0.25s ease;
+}
+
+/* === Workspaces === */
+#workspaces button {
+    padding: 0 6px;
+    margin: 0 3px;
+    color: @fg;
+    background: @surface;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    background: rgba(90, 140, 255, 0.15);
+    border-color: rgba(90, 140, 255, 0.25);
+}
+
+#workspaces button.active {
+    color: #ffffff;
+    background: @accent;
+    border: 1px solid @accent;
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    color: @urgent;
+    border-color: @urgent;
+}
+
+/* === Active Window Title === */
+#window {
+    padding: 0 10px;
+    color: @fg;
+    font-weight: bold;
+}
+
+/* === Modules === */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 8px;
+    color: @fg;
+    background: transparent;
+    border: none;
+    transition: color 0.2s ease;
+}
+
+/* === Hover Effects === */
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: @accent;
+}

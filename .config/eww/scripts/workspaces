@@ -1,0 +1,24 @@
+#!/bin/bash
+# Stream Hyprland workspace state to eww
+# Output: JSON array [{id:N, active:bool}, ...] sorted by id, one line per update
+
+get_workspaces() {
+  local active
+  active=$(hyprctl activeworkspace -j 2>/dev/null | jq '.id' 2>/dev/null) || return
+  hyprctl workspaces -j 2>/dev/null | \
+    jq -c --argjson a "$active" \
+      '[.[] | {id: .id, active: (.id == $a)}] | sort_by(.id)' 2>/dev/null
+}
+
+get_workspaces
+
+HYPR_SOCK="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+
+ncat -U "$HYPR_SOCK" 2>/dev/null | while IFS= read -r line; do
+  event="${line%%>>*}"
+  case "$event" in
+    workspace|createworkspace|destroyworkspace|focusedmon|moveworkspace)
+      get_workspaces
+      ;;
+  esac
+done

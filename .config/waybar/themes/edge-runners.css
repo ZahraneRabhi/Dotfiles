@@ -1,0 +1,100 @@
+@define-color fg #00fff9;
+/* cyan neon text */
+@define-color bg rgba(10, 26, 38, 0.75);
+/* deep teal-black glass background */
+@define-color accent #f2c900;
+/* neon yellow highlight */
+@define-color urgent #ff5544;
+/* hot orange-red for alerts */
+@define-color none transparent;
+
+/* === Base Font === */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 16px;
+}
+
+/* === Waybar Core === */
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 12px;
+    border: 1px solid rgba(242, 201, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 249, 0.25);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* === Workspaces === */
+#workspaces button {
+    padding: 0 6px;
+    margin: 0 3px;
+    color: @fg;
+    background: rgba(5, 10, 15, 0.4);
+    border: 1px solid rgba(0, 255, 249, 0.15);
+    border-radius: 6px;
+    transition: all 0.25s ease;
+}
+
+#workspaces button:hover {
+    background: rgba(242, 201, 0, 0.12);
+    border-color: rgba(242, 201, 0, 0.4);
+    box-shadow: 0 0 6px rgba(242, 201, 0, 0.5);
+}
+
+#workspaces button.active {
+    color: #0a1a26;
+    background: @accent;
+    border: 1px solid @accent;
+    font-weight: bold;
+    box-shadow: 0 0 12px rgba(242, 201, 0, 0.6);
+}
+
+#workspaces button.urgent {
+    color: @urgent;
+    border-color: @urgent;
+    box-shadow: 0 0 10px rgba(255, 85, 68, 0.6);
+}
+
+/* === Active Window Title === */
+#window {
+    padding: 0 10px;
+    color: @fg;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(0, 255, 249, 0.6);
+}
+
+/* === Modules === */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 8px;
+    color: @fg;
+    background: transparent;
+    border: none;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+/* === Hover & Glow Effects === */
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: @accent;
+    text-shadow: 0 0 10px rgba(242, 201, 0, 0.8);
+}

@@ -1,0 +1,12 @@
+#!/bin/bash
+iface=$(ip route 2>/dev/null | awk '/^default/ {print $5; exit}')
+if [[ -z "$iface" ]]; then
+  echo "offline"
+  exit
+fi
+if [[ "$iface" == w* ]]; then
+  ssid=$(iwgetid -r 2>/dev/null)
+  echo "${ssid:-WiFi}"
+else
+  echo "$iface"
+fi

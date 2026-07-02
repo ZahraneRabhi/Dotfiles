@@ -1,0 +1,15 @@
+#!/bin/bash
+# Stream current song "Title — Artist" via playerctl --follow
+
+emit() {
+  local out
+  out=$(playerctl metadata --format "{{title}} — {{artist}}" 2>/dev/null)
+  echo "${out:-}"
+}
+
+emit
+
+playerctl metadata --follow --format "{{title}} — {{artist}}" 2>/dev/null | \
+  while IFS= read -r line; do
+    echo "${line:-}"
+  done

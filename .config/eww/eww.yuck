@@ -1,0 +1,95 @@
+;; ─── Retro Girl — eww bar ───────────────────────────────────────────────────
+
+;; Polled
+(defpoll time      :interval "1s"  "date '+%H:%M'")
+(defpoll seconds   :interval "1s"  "date '+%S'")
+(defpoll date-str  :interval "60s" "date '+%a %d %b'")
+(defpoll cpu-usage :interval "3s"  "~/.config/eww/scripts/cpu")
+(defpoll ram-usage :interval "5s"  "~/.config/eww/scripts/ram")
+(defpoll net-ssid  :interval "8s"  "~/.config/eww/scripts/network")
+(defpoll bat-info  :interval "30s" "~/.config/eww/scripts/battery")
+
+;; Listeners
+(deflisten workspaces    :initial '[]'      "~/.config/eww/scripts/workspaces")
+(deflisten win-title     :initial ""        "~/.config/eww/scripts/window-title")
+(deflisten music-meta    :initial ""        "~/.config/eww/scripts/music-info")
+(deflisten music-status  :initial "Stopped" "~/.config/eww/scripts/music-status")
+
+;; ─── Workspaces ──────────────────────────────────────────────────────────────
+
+(defwidget workspaces-bar []
+  (box :class "workspaces" :orientation "h" :space-evenly false :spacing 3
+    (for ws in workspaces
+      (button
+        :class {ws.active ? "ws-btn active" : "ws-btn"}
+        :onclick "hyprctl dispatch workspace ${ws.id}"
+        "${ws.id}"))))
+
+;; ─── Left ─────────────────────────────────────────────────────────────────────
+
+(defwidget bar-left []
+  (box :class "bar-left" :orientation "h" :space-evenly false :valign "center" :spacing 0
+    (label :class "logo" :text "")
+    (workspaces-bar)
+    (box :class "title-area" :orientation "h" :space-evenly false :spacing 6 :valign "center"
+      (label :class "title-sep" :text "")
+      (label :class "win-title"
+        :text {win-title == "" ? "Desktop" : win-title}
+        :limit-width 32
+        :show-truncated true))))
+
+;; ─── Center: Music player ─────────────────────────────────────────────────────
+
+(defwidget bar-center []
+  (box :class "bar-center" :orientation "h" :space-evenly false :halign "center" :valign "center" :spacing 0
+    (box :class "music-controls" :orientation "h" :space-evenly false :spacing 2 :valign "center"
+      (button :class "mbtn prev" :onclick "playerctl previous" "")
+      (button
+        :class {music-status == "Playing" ? "mbtn playpause playing" : "mbtn playpause"}
+        :onclick "playerctl play-pause"
+        {music-status == "Playing" ? "" : ""})
+      (button :class "mbtn next" :onclick "playerctl next" ""))
+    (box :class "music-info" :orientation "h" :space-evenly false :spacing 8 :valign "center"
+      (label :class "music-icon" :text "")
+      (label
+        :class {music-status == "Playing" ? "music-title playing" : "music-title"}
+        :text {music-meta == "" ? "Nothing playing" : music-meta}
+        :limit-width 38
+        :show-truncated true))))
+
+;; ─── Right: Stats + Clock ─────────────────────────────────────────────────────
+
+(defwidget bar-right []
+  (box :class "bar-right" :orientation "h" :space-evenly false :halign "end" :valign "center" :spacing 0
+    (box :class "stats" :orientation "h" :space-evenly false :spacing 0 :valign "center"
+      (label :class "stat cpu" :text " ${cpu-usage}%")
+      (label :class "stat-sep" :text "·")
+      (label :class "stat ram" :text " ${ram-usage}%")
+      (label :class "stat-sep" :text "·")
+      (label :class "stat net" :text " ${net-ssid}")
+      (label :class "stat-sep" :text "·")
+      (label :class "stat bat" :text bat-info))
+    (box :class "clock-box" :orientation "v" :space-evenly false :valign "center"
+      (label :class "clock-time" :text time)
+      (label :class "clock-date" :text date-str))))
+
+;; ─── Bar + Window ─────────────────────────────────────────────────────────────
+
+(defwidget bar []
+  (centerbox :class "bar-wrapper" :orientation "h"
+    (bar-left)
+    (bar-center)
+    (bar-right)))
+
+(defwindow retro-bar
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :width "100%"
+    :height "52px"
+    :anchor "top center")
+  :stacking "fg"
+  :exclusive true
+  :focusable false
+  (bar))

@@ -2,7 +2,7 @@
     "custom/nightlight": {
         "format": "{}",
         "exec": "~/.local/bin/nightlight-status",
-        "interval": 1,
+        "interval": "once",
         "on-click": "~/.local/bin/toggle-nightlight"
     }
 }

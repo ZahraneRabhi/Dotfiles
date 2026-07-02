@@ -1,0 +1,165 @@
+@define-color fg #2f2418;
+/* dark ink brown */
+
+@define-color bg rgba(193, 160, 107, 0.38);
+/* parchment glass background */
+
+@define-color accent #6e4b2a;
+/* warm leather brown */
+
+@define-color accent-soft rgba(110, 75, 42, 0.18);
+/* subtle hover tint */
+
+@define-color urgent #8b2e1f;
+/* deep mordor red */
+
+@define-color border rgba(88, 58, 33, 0.28);
+/* aged border */
+
+@define-color none transparent;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 16px;
+}
+
+/* === Waybar Core === */
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+
+    border-radius: 14px;
+    border: 1px solid @border;
+
+    /* aged parchment shadow */
+    box-shadow:
+        0 0 18px rgba(70, 45, 20, 0.18),
+        inset 0 1px 0 rgba(255, 240, 210, 0.15);
+
+    transition:
+        background-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* === Workspaces === */
+#workspaces button {
+    padding: 0 7px;
+    margin: 0 4px;
+
+    color: @fg;
+
+    background: rgba(120, 88, 52, 0.10);
+
+    border: 1px solid rgba(110, 75, 42, 0.18);
+    border-radius: 7px;
+
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    background: rgba(110, 75, 42, 0.16);
+    border-color: rgba(110, 75, 42, 0.35);
+
+    box-shadow:
+        0 0 8px rgba(110, 75, 42, 0.18);
+}
+
+#workspaces button.active {
+    color: #efe1c2;
+
+    background: @accent;
+    border: 1px solid @accent;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 0 10px rgba(110, 75, 42, 0.28);
+}
+
+#workspaces button.urgent {
+    color: #f3d4cb;
+
+    background: rgba(139, 46, 31, 0.16);
+    border-color: @urgent;
+
+    box-shadow:
+        0 0 10px rgba(139, 46, 31, 0.25);
+}
+
+/* === Active Window Title === */
+#window {
+    padding: 0 12px;
+
+    color: @fg;
+    font-weight: bold;
+
+    text-shadow:
+        0 0 3px rgba(90, 60, 35, 0.18);
+}
+
+/* === Modules === */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 10px;
+
+    color: @fg;
+
+    background: transparent;
+    border: none;
+}
+
+/* === Hover Effects === */
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: @accent;
+
+    text-shadow:
+        0 0 5px rgba(110, 75, 42, 0.28);
+}
+
+/* === Tray === */
+#tray {
+    padding-right: 12px;
+}
+
+/* === Battery States === */
+#battery.warning {
+    color: #9c5a28;
+}
+
+#battery.critical {
+    color: @urgent;
+}
+
+/* === Tooltip === */
+tooltip {
+    background: rgba(222, 196, 150, 0.92);
+
+    border: 1px solid rgba(110, 75, 42, 0.25);
+    border-radius: 10px;
+
+    color: #2f2418;
+}
+
+tooltip label {
+    color: #2f2418;
+}

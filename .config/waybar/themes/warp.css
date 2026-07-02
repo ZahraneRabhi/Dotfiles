@@ -1,0 +1,101 @@
+@define-color fg #ffe8c8;
+@define-color bg rgba(4, 2, 2, 0.97);
+@define-color accent #f8a000;
+@define-color urgent #ff5020;
+@define-color none transparent;
+
+/* ARCHETYPE: warp drive — 2px sharp, top amber accent line, no glow on bar itself */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 2px;
+    border: none;
+    border-top: 2px solid rgba(248, 160, 0, 0.85);
+    box-shadow: 0 -4px 20px rgba(248, 160, 0, 0.15);
+    transition: all 0.2s ease;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 0 2px;
+    color: rgba(255, 232, 200, 0.38);
+    background: transparent;
+    border: none;
+    border-top: 2px solid transparent;
+    border-radius: 0px;
+    transition: all 0.15s ease;
+}
+
+#workspaces button:hover {
+    color: @fg;
+    border-top-color: rgba(248, 160, 0, 0.60);
+    background: rgba(248, 160, 0, 0.07);
+}
+
+#workspaces button.active {
+    color: #040202;
+    background: @accent;
+    border-top: 2px solid #ffd080;
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    color: @urgent;
+    border-top-color: @urgent;
+}
+
+#window {
+    padding: 0 10px;
+    color: @fg;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 9px;
+    color: rgba(255, 232, 200, 0.70);
+    background: transparent;
+    border: none;
+    transition: color 0.15s ease;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: @accent;
+}
+
+#tray { padding-right: 12px; }
+#battery.warning { color: #f8a000; }
+#battery.critical { color: @urgent; }
+
+tooltip {
+    background: rgba(4, 2, 2, 0.99);
+    border: 1px solid rgba(248, 160, 0, 0.40);
+    border-radius: 2px;
+    color: @fg;
+}
+tooltip label { color: @fg; }

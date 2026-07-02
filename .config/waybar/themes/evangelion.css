@@ -1,0 +1,105 @@
+@define-color fg #b8bcc8;
+@define-color bg rgba(4, 4, 6, 0.97);
+@define-color accent #9098a8;
+@define-color alert #c01020;
+@define-color urgent #c01020;
+@define-color none transparent;
+
+/* ARCHETYPE: NERV command terminal — 0px brutalist, top command line border, alert-red active */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+}
+
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 0px;
+    border: none;
+    border-top: 2px solid rgba(160, 168, 184, 0.55);
+    box-shadow: 0 -2px 12px rgba(4, 4, 6, 0.90);
+    transition: none;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 0 1px;
+    color: rgba(184, 188, 200, 0.35);
+    background: transparent;
+    border: none;
+    border-top: 2px solid transparent;
+    border-radius: 0px;
+    transition: all 0.12s ease;
+}
+
+#workspaces button:hover {
+    color: @fg;
+    border-top-color: rgba(160, 168, 184, 0.55);
+    background: rgba(160, 168, 184, 0.05);
+}
+
+#workspaces button.active {
+    color: @alert;
+    background: rgba(192, 16, 32, 0.10);
+    border-top: 2px solid @alert;
+    box-shadow: inset 0 0 10px rgba(192, 16, 32, 0.12);
+}
+
+#workspaces button.urgent {
+    color: @alert;
+    background: rgba(192, 16, 32, 0.16);
+    border-top-color: @alert;
+}
+
+#window {
+    padding: 0 10px;
+    color: rgba(184, 188, 200, 0.65);
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 8px;
+    color: rgba(184, 188, 200, 0.55);
+    background: transparent;
+    border: none;
+    border-right: 1px solid rgba(160, 168, 184, 0.10);
+    transition: color 0.12s ease;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: @fg;
+}
+
+#tray { padding-right: 12px; border-right: none; }
+#battery.warning { color: rgba(184, 188, 200, 0.85); }
+#battery.critical { color: @alert; }
+
+tooltip {
+    background: rgba(4, 4, 6, 0.99);
+    border: 1px solid rgba(160, 168, 184, 0.30);
+    border-radius: 0px;
+    color: @fg;
+}
+tooltip label { color: @fg; }
