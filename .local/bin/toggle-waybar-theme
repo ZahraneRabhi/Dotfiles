@@ -96,6 +96,16 @@ THEMES=(
   "RED CAPE:$WALLPAPER_DIR/wallhaven-yqx7kg (1).jpg:$WAYBAR_DIR/themes/crimson-moon.css:$HYPR_THEMES_DIR/looks/look-crimson-moon.conf:$FOOT_DIR/crimson-moon.ini"
   "CUPHEAD:$WALLPAPER_DIR/wallhaven-zmdx1j.jpg:$WAYBAR_DIR/themes/lunar.css:$HYPR_THEMES_DIR/looks/look-lunar.conf:$FOOT_DIR/lunar.ini"
   "RED:$WALLPAPER_DIR/evil_jordan.png:$WAYBAR_DIR/themes/crimson-moon.css:$HYPR_THEMES_DIR/looks/look-crimson-moon.conf:$FOOT_DIR/crimson-moon.ini"
+
+  # --- Newest Themes ---
+  "MIDNIGHT SWIM:$WALLPAPER_DIR/wallhaven-3q9w3v.png:$WAYBAR_DIR/themes/midnight-swim.css:$HYPR_THEMES_DIR/looks/look-midnight-swim.conf:$FOOT_DIR/midnight-swim.ini"
+  "RED DAWN:$WALLPAPER_DIR/wallhaven-3qr16y.jpg:$WAYBAR_DIR/themes/red-dawn.css:$HYPR_THEMES_DIR/looks/look-red-dawn.conf:$FOOT_DIR/red-dawn.ini"
+  "OLD WORLD:$WALLPAPER_DIR/wallhaven-3qrdr6.jpg:$WAYBAR_DIR/themes/old-world.css:$HYPR_THEMES_DIR/looks/look-old-world.conf:$FOOT_DIR/old-world.ini"
+  "AMBER SPIRE:$WALLPAPER_DIR/wallhaven-gw8yge.jpg:$WAYBAR_DIR/themes/amber-spire.css:$HYPR_THEMES_DIR/looks/look-amber-spire.conf:$FOOT_DIR/amber-spire.ini"
+  "GOTHAM NOIR:$WALLPAPER_DIR/wallhaven-poyd59.jpg:$WAYBAR_DIR/themes/gotham-noir.css:$HYPR_THEMES_DIR/looks/look-gotham-noir.conf:$FOOT_DIR/gotham-noir.ini"
+  "HIDDEN VALLEY:$WALLPAPER_DIR/wallhaven-poyrx9.jpg:$WAYBAR_DIR/themes/hidden-valley.css:$HYPR_THEMES_DIR/looks/look-hidden-valley.conf:$FOOT_DIR/hidden-valley.ini"
+  "WINDOWS XP:$WALLPAPER_DIR/wallhaven-rqp3r7.jpg:$WAYBAR_DIR/themes/windows-xp.css:$HYPR_THEMES_DIR/looks/look-windows-xp.conf:$FOOT_DIR/windows-xp.ini"
+  "BLACK METAL:$WALLPAPER_DIR/wallhaven-vpdx78.jpg:$WAYBAR_DIR/themes/black-metal.css:$HYPR_THEMES_DIR/looks/look-black-metal.conf:$FOOT_DIR/black-metal.ini"
 )
 
 # --- Wofi menu with wallpaper previews ---
@@ -117,18 +127,26 @@ generate_wofi_items() {
   done
 }
 
-SELECTED=$(generate_wofi_items |
-  wofi --dmenu \
-    --allow-images \
-    --prompt "Select Theme" \
-    --width 820 \
-    --height 600 \
-    --lines 10 \
-    --columns 2 \
-    --cache-file /dev/null |
-  sed 's|^img:[^:]*:text:||')
+# --restore (login): re-apply the saved theme without the menu
+if [[ "$1" == "--restore" ]]; then
+  RESTORE=1
+  SELECTED=$(cat "$THEME_STATE" 2>/dev/null)
+  # hyprpaper starts alongside us at login; wait up to 5s for its IPC
+  for _ in {1..50}; do hyprctl hyprpaper listactive >/dev/null 2>&1 && break; sleep 0.1; done
+else
+  SELECTED=$(generate_wofi_items |
+    wofi --dmenu \
+      --allow-images \
+      --prompt "Select Theme" \
+      --width 820 \
+      --height 600 \
+      --lines 10 \
+      --columns 2 \
+      --cache-file /dev/null |
+    sed 's|^img:[^:]*:text:||')
 
-[ -z "$SELECTED" ] && exit 0
+  [ -z "$SELECTED" ] && exit 0
+fi
 
 # --- Apply selected theme ---
 for entry in "${THEMES[@]}"; do
@@ -141,8 +159,7 @@ for entry in "${THEMES[@]}"; do
     ln -sf "$FOOT_THEME" "$ACTIVE_FOOT"
     #pkill -x foot 2>/dev/null
 
-    # Apply wallpaper — preload once, set per monitor
-    hyprctl hyprpaper preload "$WALLPAPER"
+    # Apply wallpaper per monitor
     for monitor in $(hyprctl monitors -j | jq -r '.[].name'); do
       hyprctl hyprpaper wallpaper "$monitor,$WALLPAPER"
     done
@@ -150,16 +167,37 @@ for entry in "${THEMES[@]}"; do
     # Write state for Waybar widget (triggers inotifywait instantly)
     echo "$NAME" >"$THEME_STATE"
 
-    # Reload Hyprland config
-    hyprctl reload
+    # Reload Hyprland config (skipped at login, the config is freshly loaded)
+    [[ -z "$RESTORE" ]] && hyprctl reload
+    MATCHED=1
 
-    # Restart Waybar cleanly
-    pkill -x waybar 2>/dev/null
-    sleep 0.5
-    nohup waybar >/dev/null 2>&1 &
-    disown
+    # Bar: WINDOWS XP uses the eww Luna taskbar (on every monitor); other themes use Waybar
+    close_xp_bars() {
+      eww active-windows 2>/dev/null | awk -F: '/xp-bar/{print $1}' | while read -r w; do
+        eww close "$w" >/dev/null 2>&1
+      done
+    }
+    if [[ "$NAME" == "WINDOWS XP" ]]; then
+      pkill -x waybar 2>/dev/null
+      eww ping >/dev/null 2>&1 || eww daemon >/dev/null 2>&1
+      eww reload >/dev/null 2>&1
+      eww close retro-bar >/dev/null 2>&1
+      close_xp_bars
+      for mon in $(hyprctl monitors -j | jq -r '.[].id'); do
+        eww open xp-bar --id "xp-bar-$mon" --screen "$mon" >/dev/null 2>&1
+      done
+    else
+      close_xp_bars
+      pkill -x waybar 2>/dev/null
+      sleep 0.5
+      nohup waybar >/dev/null 2>&1 &
+      disown
+    fi
 
-    notify-send "Theme switched" "Now using: $NAME"
+    [[ -z "$RESTORE" ]] && notify-send "Theme switched" "Now using: $NAME"
     break
   fi
 done
+
+# Saved theme missing or renamed: still give the user a bar
+[[ -n "$RESTORE" && -z "$MATCHED" ]] && exec waybar
