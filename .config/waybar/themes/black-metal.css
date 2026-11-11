@@ -1,0 +1,99 @@
+@define-color fg #e8e8e8;
+@define-color bg rgba(6, 6, 6, 0.96);
+@define-color accent #8a8a8a;
+@define-color urgent #8a1515;
+@define-color none transparent;
+
+/* ARCHETYPE: necro ink — pure monochrome, 0px sharp edges, thin hairline borders, blood-red only for urgent */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
+}
+
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 0px;
+    border: 1px solid rgba(232, 232, 232, 0.18);
+    box-shadow:
+        0 2px 18px rgba(0, 0, 0, 0.80),
+        inset 0 1px 0 rgba(232, 232, 232, 0.06);
+    transition: all 0.20s ease;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 0 1px;
+    color: rgba(232, 232, 232, 0.30);
+    background: transparent;
+    border: none;
+    border-radius: 0px;
+    transition: all 0.15s ease;
+}
+
+#workspaces button:hover {
+    color: rgba(232, 232, 232, 0.70);
+    background: rgba(232, 232, 232, 0.06);
+}
+
+#workspaces button.active {
+    color: #060606;
+    background: #e8e8e8;
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    color: @urgent;
+    box-shadow: inset 0 0 0 1px rgba(138, 21, 21, 0.70);
+}
+
+#window {
+    padding: 0 10px;
+    color: rgba(232, 232, 232, 0.75);
+    font-weight: bold;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 9px;
+    color: rgba(232, 232, 232, 0.65);
+    background: transparent;
+    border: none;
+    transition: color 0.15s ease;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: #ffffff;
+}
+
+#tray { padding-right: 12px; }
+#battery.warning { color: #b0b0b0; }
+#battery.critical { color: @urgent; }
+
+tooltip {
+    background: rgba(6, 6, 6, 0.98);
+    border: 1px solid rgba(232, 232, 232, 0.25);
+    border-radius: 0px;
+    color: @fg;
+}
+tooltip label { color: @fg; }

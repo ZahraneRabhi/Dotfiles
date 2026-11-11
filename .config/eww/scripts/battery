@@ -1,5 +1,8 @@
 #!/bin/bash
-bat=$(ls /sys/class/power_supply/BAT* 2>/dev/null | head -1)
+bat=""
+for b in /sys/class/power_supply/BAT*; do
+  [[ -r "$b/capacity" ]] && { bat="$b"; break; }
+done
 if [[ -z "$bat" ]]; then
   echo " AC"
   exit

@@ -93,3 +93,119 @@
   :exclusive true
   :focusable false
   (bar))
+
+;; ─── Activate Linux watermark ─────────────────────────────────────────────────
+;; Parody of the Windows "Activate Windows" nag. Hidden by default —
+;; toggle it with the `activate-linux` script.
+
+(defwidget activate-linux-nag []
+  (box :class "activate-linux" :orientation "v" :space-evenly false :spacing 2
+       :halign "start" :valign "start"
+    (label :class "al-title" :halign "start" :text "Activate Linux")
+    (label :class "al-sub"   :halign "start" :text "Go to Settings to activate Linux.")))
+
+(defwindow activate-linux
+  :monitor 0
+  :geometry (geometry
+    :x "40px"
+    :y "70px"
+    :width "330px"
+    :height "76px"
+    :anchor "bottom right")
+  :stacking "bg"
+  :exclusive false
+  :focusable false
+  (activate-linux-nag))
+
+;; ─── Windows XP — Luna taskbar ────────────────────────────────────────────────
+;; A pixel-faithful XP taskbar for the WINDOWS XP theme. Bottom of screen,
+;; green Start button + 4-colour flag, live task buttons, inset system tray.
+
+(defpoll xp-time :interval "10s"   "date '+%-I:%M %p'")
+(defpoll xp-date :interval "1800s" "date '+%A, %B %-d, %Y'")
+
+(deflisten xp-tasks :initial "[]" "~/.config/eww/scripts/xp-tasks")
+
+;; The little waving 4-colour Windows flag, built from four boxes.
+(defwidget xp-flag []
+  (box :class "xp-flag" :orientation "v" :space-evenly true :spacing 1
+       :valign "center" :halign "center" :vexpand false :hexpand false
+    (box :orientation "h" :space-evenly true :spacing 1
+      (box :class "xp-flag-q red")
+      (box :class "xp-flag-q green"))
+    (box :orientation "h" :space-evenly true :spacing 1
+      (box :class "xp-flag-q blue")
+      (box :class "xp-flag-q yellow"))))
+
+(defwidget xp-start []
+  (button :class "xp-start" :onclick "wofi --show drun &"
+    (box :orientation "h" :space-evenly false :spacing 7 :valign "center"
+      (xp-flag)
+      (label :class "xp-start-label" :text "start"))))
+
+;; Quick Launch — spawn brand-new windows (next to Start, like classic XP).
+(defwidget xp-quicklaunch []
+  (box :class "xp-quicklaunch" :orientation "h" :space-evenly false :spacing 1 :valign "center"
+    (button :class "xp-ql-btn" :onclick "foot &"    :tooltip "New Terminal window" "")
+    (button :class "xp-ql-btn" :onclick "firefox &" :tooltip "Web browser"         "")
+    (button :class "xp-ql-btn" :onclick "dolphin &" :tooltip "Files"               "")
+    (box :class "xp-ql-sep")))
+
+(defwidget xp-tasks-band []
+  (box :class "xp-tasks" :orientation "h" :space-evenly false :spacing 0
+       :hexpand true :halign "start"
+    (for win in xp-tasks
+      (button
+        :class {win.active ? "xp-task active" : "xp-task"}
+        :onclick "hyprctl dispatch focuswindow address:${win.address}"
+        :tooltip {win.title}
+        (box :orientation "h" :space-evenly false :spacing 7 :valign "center"
+          (label :class "xp-task-icon"
+            :text {matches(win.class, "(?i)foot|kitty|alacritty|wezterm|term") ? "" :
+                   matches(win.class, "(?i)firefox|zen|librewolf")            ? "" :
+                   matches(win.class, "(?i)brave|chrom|edge")                 ? "" :
+                   matches(win.class, "(?i)code|vscod")                       ? "" :
+                   matches(win.class, "(?i)thunar|nautilus|nemo|dolphin|files") ? "" :
+                   matches(win.class, "(?i)spotify")                          ? "" :
+                   matches(win.class, "(?i)zathura|evince|okular|pdf")        ? "" :
+                   ""})
+          (label :class "xp-task-label"
+            :text {win.title == "" ? win.class : win.title}
+            :limit-width 24
+            :show-truncated true))))))
+
+(defwidget xp-tray []
+  (box :class "xp-tray" :orientation "h" :space-evenly false :spacing 11
+       :halign "end" :valign "fill"
+    (button :class "xp-theme-btn" :onclick "~/.local/bin/toggle-waybar-theme &"
+            :tooltip "Change theme" "")
+    (label :class "xp-lang" :text "EN")
+    (label :class "xp-tray-icon chevron" :text "")
+    (label :class "xp-tray-icon" :text "")
+    (label :class "xp-tray-icon" :text "")
+    (label :class "xp-tray-bat" :text bat-info)
+    (box :class "xp-tray-divider")
+    (box :class "xp-clock" :orientation "v" :space-evenly false :valign "center"
+         :tooltip xp-date
+      (label :class "xp-clock-time" :text xp-time))))
+
+(defwidget xp-taskbar []
+  (box :class "xp-taskbar" :orientation "h" :space-evenly false :spacing 0
+    (xp-start)
+    (xp-quicklaunch)
+    (box :class "xp-taskband-sep")
+    (xp-tasks-band)
+    (xp-tray)))
+
+(defwindow xp-bar
+  :monitor 0
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :width "100%"
+    :height "34px"
+    :anchor "bottom center")
+  :stacking "fg"
+  :exclusive true
+  :focusable false
+  (xp-taskbar))

@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# ─── Activate Linux ───────────────────────────────────────────────────────────
+# Toggle the "Activate Linux" watermark (a parody of the Windows activation nag).
+# The eww window is hidden by default and only appears when this script runs it.
+# Shown on every connected monitor.
+#
+# Usage:
+#   activate-linux           # toggle on/off
+#   activate-linux on        # show it
+#   activate-linux off       # hide it
+#   activate-linux toggle    # same as no argument
+
+set -uo pipefail
+
+WIN="activate-linux"
+action="${1:-toggle}"
+
+eww=$(command -v eww) || { echo "activate-linux: eww is not installed" >&2; exit 1; }
+
+# Make sure the eww daemon is alive (it loads ~/.config/eww/eww.yuck).
+"$eww" ping >/dev/null 2>&1 || "$eww" daemon >/dev/null 2>&1
+
+open_all() {
+  for mon in $(hyprctl monitors -j | jq -r '.[].id'); do
+    "$eww" open "$WIN" --id "${WIN}-${mon}" --screen "$mon" >/dev/null 2>&1
+  done
+}
+
+close_all() {
+  "$eww" active-windows 2>/dev/null | awk -F: -v w="$WIN" '$0 ~ w {print $1}' | \
+    while read -r id; do "$eww" close "$id" >/dev/null 2>&1; done
+}
+
+is_open() { "$eww" active-windows 2>/dev/null | grep -q "$WIN"; }
+
+case "$action" in
+  on)            open_all ;;
+  off)           close_all ;;
+  toggle|"")     if is_open; then close_all; else open_all; fi ;;
+  *)
+    echo "usage: $(basename "$0") [on|off|toggle]" >&2
+    exit 1
+    ;;
+esac

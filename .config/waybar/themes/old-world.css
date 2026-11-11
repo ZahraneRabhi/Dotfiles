@@ -1,0 +1,103 @@
+@define-color fg #f0e6cc;
+@define-color bg rgba(36, 28, 16, 0.86);
+@define-color accent #c68a52;
+@define-color urgent #a8503a;
+@define-color none transparent;
+
+/* ARCHETYPE: painterly countryside — moderate rounding, warm terracotta glow, sage-green active state */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 15px;
+}
+
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 12px;
+    border: 1px solid rgba(198, 138, 82, 0.30);
+    box-shadow:
+        0 0 22px rgba(198, 138, 82, 0.18),
+        0 4px 50px rgba(36, 28, 16, 0.65),
+        inset 0 1px 0 rgba(240, 230, 204, 0.08);
+    transition: all 0.40s ease;
+}
+
+#workspaces button {
+    padding: 0 9px;
+    margin: 0 2px;
+    color: rgba(240, 230, 204, 0.45);
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+}
+
+#workspaces button:hover {
+    color: @fg;
+    background: rgba(125, 148, 103, 0.14);
+}
+
+#workspaces button.active {
+    color: #241c10;
+    background: #7d9467;
+    box-shadow: 0 0 12px rgba(125, 148, 103, 0.45);
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    color: @urgent;
+    background: rgba(168, 80, 58, 0.14);
+}
+
+#window {
+    padding: 0 12px;
+    color: @fg;
+    font-style: italic;
+    text-shadow: 0 0 8px rgba(198, 138, 82, 0.35);
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 10px;
+    color: rgba(240, 230, 204, 0.78);
+    background: transparent;
+    border: none;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: #86aac9;
+    text-shadow: 0 0 8px rgba(134, 170, 201, 0.55);
+}
+
+#tray { padding-right: 12px; }
+#battery.warning { color: #c68a52; }
+#battery.critical { color: @urgent; }
+
+tooltip {
+    background: rgba(36, 28, 16, 0.94);
+    border: 1px solid rgba(198, 138, 82, 0.30);
+    border-radius: 10px;
+    color: @fg;
+}
+tooltip label { color: @fg; }

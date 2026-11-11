@@ -1,0 +1,151 @@
+@define-color fg #0a1f4a;
+@define-color bg #1f5fde;
+@define-color accent #6fc73e;
+@define-color urgent #d92020;
+@define-color none transparent;
+
+/* ARCHETYPE: Windows XP Luna chrome — glossy blue title-bar gradient, beveled 3D taskbar buttons, green Start pill, sunken tray */
+* {
+    font-family: "DejaVu Sans", "JetBrainsMono Nerd Font", sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-image:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0) 14%),
+        linear-gradient(180deg, #4e9bff 0%, #1f5fde 45%, #0b3fae 100%);
+    color: #ffffff;
+    border-radius: 6px 6px 0 0;
+    border: 1px solid #082a7a;
+    border-bottom: 2px solid #051c52;
+    box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+#custom-logo.arch-logo {
+    font-size: 16px;
+    padding: 0 18px 0 14px;
+    margin-right: 4px;
+    color: #ffffff;
+    background-image:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 40%),
+        linear-gradient(180deg, #8fe05c 0%, #6fc73e 45%, #2e8b1e 100%);
+    border: 1px solid #1d5e12;
+    border-radius: 0 16px 16px 0;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.60),
+        0 1px 2px rgba(0, 0, 0, 0.40);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.55);
+}
+
+#custom-logo.arch-logo:hover {
+    background-image:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 40%),
+        linear-gradient(180deg, #a0f070 0%, #7fd94a 45%, #388f22 100%);
+}
+
+#workspaces {
+    margin: 0 4px;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    margin: 0 2px;
+    color: #eaf2ff;
+    background-image: linear-gradient(180deg, #6f9ee8 0%, #3a6fc9 50%, #2b57a8 100%);
+    border: 1px solid #16346e;
+    border-radius: 3px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.45),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+    transition: all 0.12s ease;
+}
+
+#workspaces button:hover {
+    background-image: linear-gradient(180deg, #85b0f0 0%, #4a80d8 50%, #3562b8 100%);
+}
+
+#workspaces button.active {
+    color: #ffffff;
+    background-image: linear-gradient(180deg, #2b57a8 0%, #1f4488 50%, #6fc73e 100%);
+    border: 1px solid #0d2a5e;
+    box-shadow:
+        inset 0 1px 3px rgba(0, 0, 0, 0.45),
+        0 0 6px rgba(111, 199, 62, 0.55);
+}
+
+#workspaces button.urgent {
+    background-image: linear-gradient(180deg, #e85a4a 0%, #b82818 100%);
+    color: #fff2e8;
+}
+
+#window {
+    padding: 0 12px;
+    color: #eaf2ff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.40);
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-nightlight,
+#custom-notification,
+#custom-theme-toggle {
+    padding: 0 9px;
+    margin: 0 1px;
+    color: #eaf2ff;
+    background-color: rgba(11, 40, 110, 0.45);
+    border: 1px solid #0a2050;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.50);
+    transition: color 0.15s ease;
+}
+
+#clock {
+    color: #d8ffb0;
+    background-color: rgba(6, 24, 6, 0.55);
+    border: 1px solid #0a3a0a;
+    text-shadow: 0 0 4px rgba(140, 255, 120, 0.55);
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: #ffffff;
+}
+
+#tray { padding-right: 12px; }
+#battery.warning { color: #ffd85a; }
+#battery.critical { color: @urgent; }
+
+#custom-sep {
+    color: rgba(255, 255, 255, 0.20);
+    padding: 0 1px;
+    margin: 3px 0;
+    background: transparent;
+    border-left: 1px solid rgba(0, 0, 0, 0.35);
+    border-right: 1px solid rgba(255, 255, 255, 0.30);
+}
+
+tooltip {
+    background-color: #ffffe1;
+    border: 1px solid #000000;
+    border-radius: 0px;
+    color: #000000;
+}
+tooltip label { color: #000000; }

@@ -1,0 +1,103 @@
+@define-color fg #e2ede6;
+@define-color bg rgba(13, 26, 22, 0.86);
+@define-color accent #5fa88f;
+@define-color urgent #c9955a;
+@define-color none transparent;
+
+/* ARCHETYPE: misty valley — generous rounding, heavy haze blur feel, dreamy slow glow */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 15px;
+}
+
+window#waybar {
+    background-color: @bg;
+    color: @fg;
+    border-radius: 20px;
+    border: 1px solid rgba(95, 168, 143, 0.26);
+    box-shadow:
+        0 0 30px rgba(95, 168, 143, 0.20),
+        0 4px 60px rgba(13, 26, 22, 0.70),
+        inset 0 1px 0 rgba(226, 237, 230, 0.08);
+    transition: all 0.55s ease;
+}
+
+#workspaces button {
+    padding: 0 9px;
+    margin: 0 3px;
+    color: rgba(226, 237, 230, 0.42);
+    background: transparent;
+    border: none;
+    border-radius: 20px;
+    transition: all 0.32s ease;
+}
+
+#workspaces button:hover {
+    color: @fg;
+    background: rgba(95, 168, 143, 0.12);
+}
+
+#workspaces button.active {
+    color: #0d1a16;
+    background: rgba(163, 217, 189, 0.85);
+    box-shadow: 0 0 14px rgba(163, 217, 189, 0.50);
+    font-weight: bold;
+}
+
+#workspaces button.urgent {
+    color: @urgent;
+    background: rgba(201, 149, 90, 0.14);
+}
+
+#window {
+    padding: 0 12px;
+    color: @fg;
+    font-style: italic;
+    text-shadow: 0 0 10px rgba(95, 168, 143, 0.40);
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#network,
+#backlight,
+#tray,
+#mpris,
+#pulseaudio,
+#custom-power,
+#custom-logo,
+#custom-nightlight,
+#custom-notification,
+#custom-sep {
+    padding: 0 10px;
+    color: rgba(226, 237, 230, 0.75);
+    background: transparent;
+    border: none;
+    transition: color 0.32s ease, text-shadow 0.32s ease;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#tray:hover {
+    color: #a3d9bd;
+    text-shadow: 0 0 10px rgba(163, 217, 189, 0.60);
+}
+
+#tray { padding-right: 12px; }
+#battery.warning { color: #c9955a; }
+#battery.critical { color: @urgent; }
+
+tooltip {
+    background: rgba(13, 26, 22, 0.94);
+    border: 1px solid rgba(95, 168, 143, 0.30);
+    border-radius: 16px;
+    color: @fg;
+}
+tooltip label { color: @fg; }
