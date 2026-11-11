@@ -4,7 +4,7 @@
 
 WALLPAPER="$HOME/Pictures/Wallpapers/wallhaven-6lwo6x.png"
 FOOT_THEME="$HOME/.config/foot/retro.ini"
-HYPR_LOOK="$HOME/.config/hypr/hyprland-modules/looks/look-retro.conf"
+HYPR_LOOK="$HOME/.config/hypr/hyprland-modules/looks/look-retro.lua"
 
 eww_running() {
   eww ping &>/dev/null
@@ -18,7 +18,7 @@ start_eww() {
 
   # Apply Hypr look (colors, rounding, etc.)
   if [[ -f "$HYPR_LOOK" ]]; then
-    hyprctl keyword source "$HYPR_LOOK" 2>/dev/null
+    hyprctl eval "dofile([[$HYPR_LOOK]])" 2>/dev/null
   fi
 
   # Update foot terminal theme
